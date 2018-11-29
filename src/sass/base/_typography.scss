@@ -40,7 +40,7 @@ ul {
     }
     &--light--lightest {
       font-size: 2rem;
-      font-weight: 600;
+      font-weight: 400;
       color: $color-primary-lightest;
     }
   }
@@ -52,9 +52,13 @@ ul {
       font-size: 1.6rem;
       font-weight: 600;
       &--lightest {
+        font-weight: 400;
+        font-size: 1.6rem;
         color: $color-primary-lightest;
       }
       &--light {
+        font-weight: 400;
+        font-size: 1.6rem;
         color: $color-primary-light;
       }
     }

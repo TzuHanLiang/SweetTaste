@@ -1,21 +1,61 @@
-.u-center-text { text-align: center !important; }
+.u-center-text {
+  text-align: center !important;
+}
 
-.u-margin-bottom-small { margin-bottom: 1.5rem !important; }
+.u-margin-bottom-small {
+  margin-bottom: 1.5rem !important;
+}
 .u-margin-bottom-medium {
-    margin-bottom: 4rem !important;
+  margin-bottom: 4rem !important;
 
-    @include respond(tab-port) {
-        margin-bottom: 3rem !important;
-    }
+  @include respond(tab-port) {
+    margin-bottom: 3rem !important;
+  }
 }
 
-.u-margin-bottom-big { 
-    margin-bottom: 8rem !important;
+.u-margin-bottom-big {
+  margin-bottom: 8rem !important;
 
-    @include respond(tab-port) {
-        margin-bottom: 5rem !important;
-    }
+  @include respond(tab-port) {
+    margin-bottom: 5rem !important;
+  }
+}
+.u-margin-top-sm {
+  margin-top: 3.4rem !important;
+}
+.u-margin-top-big {
+  margin-top: 8rem !important;
+}
+.u-margin-top-huge {
+  margin-top: 10rem !important;
 }
 
-.u-margin-top-big { margin-top: 8rem !important; }
-.u-margin-top-huge { margin-top: 10rem !important; }
+.h-py-3 {
+  padding-bottom: 1.6rem !important;
+}
+
+.h-justify-content-between {
+  justify-content: space-between !important;
+}
+.h-flex {
+  display: flex !important;
+}
+.h-m-3 {
+  margin: 1.6rem !important;
+}
+.h-pl-3,
+.h-px-3 {
+  padding-left: 1.6rem !important;
+}
+.h-pb-2,
+.h-py-2 {
+  padding-bottom: 0.8rem !important;
+}
+.h-pt-2,
+.h-py-2 {
+  padding-top: 0.8rem !important;
+}
+
+.h-flex-column {
+  flex-direction: column !important;
+}

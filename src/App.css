@@ -120,7 +120,7 @@ ul {
     font-weight: 600; }
   .heading-primary--sm--light--lightest {
     font-size: 2rem;
-    font-weight: 600;
+    font-weight: 400;
     color: #eaf0ed; }
 
 .heading-primary--xs {
@@ -130,8 +130,12 @@ ul {
     font-size: 1.6rem;
     font-weight: 600; }
     .heading-primary--xs--b--lightest {
+      font-weight: 400;
+      font-size: 1.6rem;
       color: #eaf0ed; }
     .heading-primary--xs--b--light {
+      font-weight: 400;
+      font-size: 1.6rem;
       color: #8da291; }
   .heading-primary--xs--light {
     font-weight: 400;
@@ -186,11 +190,41 @@ ul {
     .u-margin-bottom-big {
       margin-bottom: 5rem !important; } }
 
+.u-margin-top-sm {
+  margin-top: 3.4rem !important; }
+
 .u-margin-top-big {
   margin-top: 8rem !important; }
 
 .u-margin-top-huge {
   margin-top: 10rem !important; }
+
+.h-py-3 {
+  padding-bottom: 1.6rem !important; }
+
+.h-justify-content-between {
+  justify-content: space-between !important; }
+
+.h-flex {
+  display: flex !important; }
+
+.h-m-3 {
+  margin: 1.6rem !important; }
+
+.h-pl-3,
+.h-px-3 {
+  padding-left: 1.6rem !important; }
+
+.h-pb-2,
+.h-py-2 {
+  padding-bottom: 0.8rem !important; }
+
+.h-pt-2,
+.h-py-2 {
+  padding-top: 0.8rem !important; }
+
+.h-flex-column {
+  flex-direction: column !important; }
 
 .btn, .btn:link, .btn:visited {
   text-decoration: none;
@@ -219,6 +253,13 @@ ul {
   color: #fff; }
   .btn--green::after {
     background-color: #3f5d45; }
+
+.btn--yellow {
+  background-color: #ffe180;
+  color: #3f5d45; }
+  .btn--yellow:active, .btn--yellow:focus {
+    background-color: #ffb949;
+    outline: none; }
 
 .btn::after {
   content: "";
@@ -693,3 +734,106 @@ ul {
       justify-content: space-between !important; }
   .order__summary-submit {
     background: #ffe180; }
+
+.checkout {
+  max-width: 94rem;
+  margin: 0 auto; }
+  .checkout::after {
+    content: "";
+    display: table;
+    clear: both; }
+  .checkout__form {
+    background-color: #3f5d45;
+    width: 54rem;
+    position: relative;
+    float: left; }
+  .checkout__form-section {
+    padding: 3rem; }
+  .checkout__form-title {
+    height: 7.2rem;
+    display: inline-block; }
+  .checkout__form-progress {
+    display: inline-block;
+    position: absolute;
+    top: 1.5rem;
+    right: 2rem; }
+  .checkout__progress-step {
+    color: #eaf0ed;
+    font-size: 1.6rem;
+    display: list-item;
+    z-index: 2;
+    float: left;
+    margin: 3rem; }
+  .checkout__form__btnGroup {
+    margin: 0 0.6rem; }
+    .checkout__form__btnGroup button {
+      float: left;
+      width: 50%;
+      border: 1px solid #eaf0ed; }
+  .checkout__input-box {
+    display: block;
+    width: 100%; }
+    .checkout__input-box::after {
+      content: "";
+      display: table;
+      clear: both; }
+  .checkout__input {
+    padding: 0 0.4rem;
+    margin-bottom: 1.6rem; }
+    .checkout__input label {
+      display: inline-block; }
+    .checkout__input input {
+      font-weight: 400;
+      font-size: 1.6rem;
+      color: #8da291;
+      padding-top: 2rem;
+      padding-bottom: 2rem; }
+  .checkout__input-float {
+    float: left;
+    width: 50%; }
+
+.e-form__control {
+  display: block;
+  width: 100%;
+  padding: 1.0625rem;
+  font-size: 1rem;
+  color: #8da291;
+  background-color: #eaf0ed;
+  background-clip: padding-box;
+  border: none;
+  border-radius: 0;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; }
+
+.p-checkout__orderDetail__order {
+  float: right;
+  width: 40%; }
+
+.p-checkout__orderDetail__section__title {
+  font-size: 2.4rem;
+  background: #eaf0ed;
+  border-bottom: 1px solid #eaf0ed;
+  text-align: center;
+  padding-top: 1.6rem; }
+
+.p-checkout__orderDetail__section__detail {
+  border: 1px solid #eaf0ed;
+  margin-bottom: 1.6rem;
+  padding-top: 1.6rem;
+  padding-left: 1.6rem;
+  padding-right: 1.6rem; }
+  .p-checkout__orderDetail__section__detail li {
+    margin-bottom: 0.8rem; }
+    .p-checkout__orderDetail__section__detail li:not(:last-child) {
+      font-size: 1.6rem; }
+  .p-checkout__orderDetail__section__detail__totalPrice {
+    font-weight: bold;
+    margin-top: 1.6rem;
+    font-size: 2rem; }
+
+.p-checkout__orderDetail__section__productList {
+  border: 1px solid #eaf0ed; }
+
+.p-checkout__orderDetail__section__productList__img {
+  flex: 0.9;
+  background-position: center center;
+  background-size: cover; }

@@ -22,43 +22,74 @@ class Order extends Component {
         count: 1
       }
     ],
-    summary: {
-      productsPrice: 0,
-      shippingFee: 160,
-      totalPrice: 0
-    }
+    shippingFee: 160,
+    totalPrice: 660
   };
-  addProductHandler = product => {
-    // 更新購物車裡面的數量(同一品項新增一個也加一)
-    const oldCount = this.state.count;
-    const updateCount = oldCount + 1;
-
-    // 更新購物車裡面的物品
+  addCartItemHandler = item => {
+    // 增加購物車裡面的物品
     const updateCart = [...this.state.cart];
-    const index = updateCart.findIndex(item => item.id === product.id);
-    if (index === -1) {
-      product.count = 1;
-      updateCart.push(product);
-    } else {
-      const oldCount = updateCart[index].count;
-      const updateCount = oldCount + 1;
-      updateCart[index].count = updateCount;
-    }
+    const index = updateCart.findIndex(i => i.id === item.id);
 
-    // 更新總價
+    const oldCount = updateCart[index].count;
+    const updateCount = oldCount + 1;
+    updateCart[index].count = updateCount;
+
+    // 更新價格
     const oldPrice = this.state.totalPrice;
-    const priceAddition = product.price;
+    const priceAddition = updateCart[index].price;
     const updatePrice = oldPrice + priceAddition;
 
     this.setState({
       cart: updateCart,
-      count: updateCount,
       totalPrice: updatePrice
     });
   };
+  removeCartItemHandler = item => {
+    // 減少購物車裡面的物品
+    const updateCart = [...this.state.cart];
+    const index = updateCart.findIndex(i => i.id === item.id);
+
+    const oldCount = updateCart[index].count;
+    const updateCount = oldCount - 1;
+    updateCart[index].count = updateCount;
+
+    // 更新價格
+    const oldPrice = this.state.totalPrice;
+    const priceAddition = updateCart[index].price;
+    const updatePrice = oldPrice - priceAddition;
+
+    this.setState({
+      cart: updateCart,
+      totalPrice: updatePrice
+    });
+  };
+  deleteCartItemHandler = item => {
+    // 刪除購物車裡面的物品
+    const updateCart = [...this.state.cart];
+    const index = updateCart.findIndex(i => i.id === item.id);
+    updateCart.splice(index, 1);
+
+    // 重新計算總價
+    const updateTotalPrice = this.state.cart.reduce(
+      (acc, item) => (acc += item.price),
+      0
+    );
+
+    this.setState({
+      cart: updateCart,
+      totalPrice: updateTotalPrice
+    });
+  };
+
   render() {
     const cartItems = this.state.cart.map(item => (
-      <CartItem key={item.id} item={item} />
+      <CartItem
+        key={item.id}
+        item={item}
+        add={this.addCartItemHandler}
+        remove={this.removeCartItemHandler}
+        delete={this.deleteCartItemHandler}
+      />
     ));
     return (
       <div className="order">
@@ -70,7 +101,10 @@ class Order extends Component {
             {cartItems}
           </div>
           <div className="col-1-of-3">
-            <OrderSummary summary={this.state.summary} />
+            <OrderSummary
+              shippingFee={this.state.shippingFee}
+              totalPrice={this.state.totalPrice}
+            />
           </div>
         </div>
       </div>

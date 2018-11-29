@@ -41,6 +41,16 @@
     }
   }
 
+  &--yellow {
+    background-color: $color-secondary-light;
+    color: $color-primary;
+
+    &:active,
+    &:focus {
+      background-color: $color-secondary-dark;
+      outline: none;
+    }
+  }
   &::after {
     content: "";
     display: inline-block;

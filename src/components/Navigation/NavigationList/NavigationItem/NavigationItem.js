@@ -1,9 +1,10 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const navigationItem = props => (
   <li className="Navigation__item">
-    <a
-      href={props.link}
+    <Link
+      to={props.link}
       className={
         props.active
           ? "Navigation__link--active Navigation__link"
@@ -11,7 +12,7 @@ const navigationItem = props => (
       }
     >
       {props.children}
-    </a>
+    </Link>
   </li>
 );
 

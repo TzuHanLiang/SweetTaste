@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const orderSummary = props => {
   return (
@@ -9,23 +10,23 @@ const orderSummary = props => {
       <ul className="order__summary-detail">
         <li className=" heading-primary--xs--light">
           <span>小計 </span>
-          <span>NT$ {props.summary.productsPrice}</span>
+          <span>NT$ {props.totalPrice}</span>
         </li>
         <li className="heading-primary--xs--light">
           <span>運費</span>
-          <span>NT$ {props.summary.shippingFee}</span>
+          <span>NT$ {props.shippingFee}</span>
         </li>
         <li className=" heading-primary--sm--light--lightest">
           <span>總計</span>
-          <span>NT$ {props.summary.totalPrice}</span>
+          <span>NT$ {props.totalPrice + props.shippingFee}</span>
         </li>
       </ul>
-      <a
-        href="/checkout"
+      <Link
+        to="/checkout"
         className="btn heading-primary--medium order__summary-submit"
       >
         結帳
-      </a>
+      </Link>
     </div>
   );
 };

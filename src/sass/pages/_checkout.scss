@@ -1,0 +1,121 @@
+.checkout {
+  max-width: 94rem;
+  margin: 0 auto;
+  @include clearfix;
+  &__form {
+    background-color: $color-primary;
+    width: 54rem;
+    position: relative;
+    float: left;
+  }
+  &__form-section {
+    padding: 3rem;
+  }
+  &__form-title {
+    height: 7.2rem;
+    display: inline-block;
+  }
+  &__form-progress {
+    display: inline-block;
+    position: absolute;
+    top: 1.5rem;
+    right: 2rem;
+  }
+
+  &__progress-step {
+    color: $color-primary-lightest;
+    font-size: 1.6rem;
+    display: list-item;
+    z-index: 2;
+    float: left;
+    margin: 3rem;
+  }
+  &__form__btnGroup {
+    margin: 0 0.6rem;
+
+    & button {
+      float: left;
+      width: 50%;
+      border: 1px solid $color-primary-lightest;
+    }
+  }
+
+  &__input-box {
+    @include clearfix;
+    display: block;
+    width: 100%;
+  }
+  &__input {
+    padding: 0 0.4rem;
+    margin-bottom: 1.6rem;
+
+    & label {
+      display: inline-block;
+    }
+    & input {
+      font-weight: 400;
+      font-size: 1.6rem;
+      color: $color-primary-light;
+      padding-top: 2rem;
+      padding-bottom: 2rem;
+    }
+  }
+  &__input-float {
+    float: left;
+    width: 50%;
+  }
+}
+.e-form__control {
+  display: block;
+  width: 100%;
+  padding: 1.0625rem;
+  font-size: 1rem;
+  color: #8da291;
+  background-color: #eaf0ed;
+  background-clip: padding-box;
+  border: none;
+  border-radius: 0;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.p-checkout__orderDetail {
+  &__order {
+    float: right;
+    width: 40%;
+  }
+  &__section {
+    &__title {
+      font-size: 2.4rem;
+      background: #eaf0ed;
+      border-bottom: 1px solid #eaf0ed;
+      text-align: center;
+      padding-top: 1.6rem;
+    }
+    &__detail {
+      border: 1px solid #eaf0ed;
+      margin-bottom: 1.6rem;
+      padding-top: 1.6rem;
+      padding-left: 1.6rem;
+      padding-right: 1.6rem;
+      & li {
+        &:not(:last-child) {
+          font-size: 1.6rem;
+        }
+        margin-bottom: 0.8rem;
+      }
+      &__totalPrice {
+        font-weight: bold;
+        margin-top: 1.6rem;
+        font-size: 2rem;
+      }
+    }
+    &__productList {
+      border: 1px solid #eaf0ed;
+    }
+    &__productList__img {
+      flex: 0.9;
+      background-position: center center;
+      background-size: cover;
+    }
+  }
+}

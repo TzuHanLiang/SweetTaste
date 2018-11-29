@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 
-import OrderSummary from "../../components/OrderSummary/OrderSummary";
+import OrderSummary from "../../components/Checout/OrderSummary/OrderSummary";
+import DeliveryForm from "../../components/Checout/DeliveryForm/DeliveryForm";
+import PaymentForm from "../../components/Checout/PaymentForm/PaymentForm";
+import InvoiceForm from "../../components/Checout/InvoiceForm/InvoiceForm";
 
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import DeliveryForm from "../../components/DeliveryFrom/DeliveryForm";
-import PaymentForm from "../../components/PaymentForm/PaymentForm";
-import InvoiceForm from "../../components/InvoiceForm/InvoiceForm";
 
 class Checkout extends Component {
   state = {
@@ -38,22 +38,30 @@ class Checkout extends Component {
       },
       email: null,
       componytaxid: null
-    }
+    },
+    step: 1
   };
-  deliveryHandler = () => {};
-  paymentHandle = () => {};
-  invoiceHandle = () => {};
-  checkoutHandle = () => {};
+
+  stepProgressHandler = newStep => {
+    this.setState({ step: newStep });
+  };
+
   render() {
     return (
       <div className="checkout">
-        {/* <Router>
-          <Route exact path="/checkout" component={DeliveryForm} />
-          <Route exact path="/checkout/payment" component={PaymentForm} />
-          <Route exact path="/checkout/invoice" component={InvoiceForm} />
-        </Router> */}
-        <DeliveryForm />
         <OrderSummary />
+        {(() => {
+          switch (this.state.step) {
+            case 1:
+              return <DeliveryForm changeStep={this.stepProgressHandler} />;
+            case 2:
+              return <PaymentForm changeStep={this.stepProgressHandler} />;
+            case 3:
+              return <InvoiceForm changeStep={this.stepProgressHandler} />;
+            default:
+              return <h2>Hmmm...Something went wrong</h2>;
+          }
+        })()}
       </div>
     );
   }
