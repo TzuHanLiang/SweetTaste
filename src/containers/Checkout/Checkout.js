@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 
-import OrderSummary from "./OrderSummary/OrderSummary";
+import OrderSummary from "../../components/OrderSummary/OrderSummary";
 
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import DeliveryForm from "./DeliveryFrom/DeliveryForm";
-import PaymentForm from "./PaymentForm/PaymentForm";
-import InvoiceForm from "./InvoiceForm/InvoiceForm";
+import DeliveryForm from "../../components/DeliveryFrom/DeliveryForm";
+import PaymentForm from "../../components/PaymentForm/PaymentForm";
+import InvoiceForm from "../../components/InvoiceForm/InvoiceForm";
 
 class Checkout extends Component {
   state = {

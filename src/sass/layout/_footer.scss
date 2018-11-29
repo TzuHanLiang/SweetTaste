@@ -1,78 +1,67 @@
 .footer {
-    background-color: $color-grey-dark-3;
-    padding: 10rem 0;
-    font-size: 1.4rem;
-    color: $color-grey-light-1;
+  padding: 10rem 0;
+
+  @include respond(tab-port) {
+    padding: 8rem 0;
+  }
+
+  &__subscribe {
+    background: #3f5d45;
+    margin-top: 3.75rem;
+  }
+
+  &__register-title {
+    display: flex !important;
+    margin-bottom: 1.5rem !important;
+    align-items: center !important;
+  }
+
+  &__logo-box--1 {
+    margin-right: 2rem;
+    width: 4rem;
+    height: auto;
 
     @include respond(tab-port) {
-        padding: 8rem 0;
+      margin-bottom: 6rem;
     }
+  }
 
-    &__logo-box {
-        text-align: center;
-        margin-bottom: 8rem;
+  &__logo--1 {
+    width: 4rem;
+    height: 4rem;
+  }
 
-        @include respond(tab-port) {
-            margin-bottom: 6rem;
-        }
-    }
-
-    &__logo {
-        width: 15rem;
-        height: auto;
-    }
-
-    &__navigation {
-        border-top: 1px solid $color-grey-dark;
-        padding-top: 2rem;
-        display: inline-block;
-
-        @include respond(tab-port) {
-            width: 100%;
-            text-align: center;
-        }
-    }
-
-    &__list {
-        list-style: none;
-    }
-
-    &__item {
-        display: inline-block;
-
-        &:not(:last-child) {
-            margin-right: 1.5rem;
-        }
-    }
-
-    &__link {
-        &:link,
-        &:visited {
-            color: $color-grey-light-1;
-            background-color: $color-grey-dark-3;
-            text-decoration: none;
-            text-transform: uppercase;
-            display: inline-block;
-            transition: all .2s;
-        }
-
-        &:hover,
-        &:active {
-            color: $color-primary;
-            box-shadow: 0 1rem 2rem rgba($color-black, .4);
-            transform: rotate(5deg) scale(1.3);
-        }
-    }
-
-    &__copyright {
-        border-top: 1px solid $color-grey-dark;
-        padding-top: 2rem;
-        width: 80%;
-        float: right;
-
-        @include respond(tab-port) {
-            width: 100%;
-            float: none;
-        }
-    }
+  &__register-form {
+    background: #eaf0ed;
+    height: 3.5rem;
+    position: relative;
+    flex-grow: 1;
+  }
+  &__email-icon {
+    display: inline-block;
+    line-height: 1;
+    font-size: 2.4rem;
+    font-weight: 900;
+    position: absolute;
+    top: 1.6rem;
+    left: 1.6rem;
+    color: #3f5d45;
+  }
+  &__email-text {
+    width: calc(100% - 64px);
+    margin: 0;
+    padding: 16px 20px 16px 64px;
+    line-height: 24px;
+    background-color: #eaf0ed;
+    border: 0;
+    border-radius: 0;
+  }
+  &__arrow-icon {
+    margin: 0;
+    padding: 2rem 2.4rem 2rem;
+    color: #3f5d45;
+    font-size: $default-font-size;
+    border: none;
+    background-color: #ffe180;
+  }
 }

@@ -1,0 +1,97 @@
+.order {
+  margin: 0 14rem;
+  text-align: center;
+  &__productList {
+    background-color: $color-primary-lighter;
+    text-align: center;
+    padding: 1.6rem;
+    margin-bottom: 2rem;
+  }
+  &__product {
+    width: 100%;
+    height: 19rem;
+    padding: 2rem 0;
+    border-bottom: 1px solid $color-primary-lighter;
+  }
+  &__product-img {
+    float: left;
+    & img {
+      height: 15rem;
+      width: 15rem;
+      background-position: center;
+      background-size: contain;
+    }
+  }
+
+  &__product-info {
+    float: left;
+    margin-left: 4rem;
+    margin-top: 4rem;
+    text-align: left;
+  }
+  &__product-count {
+    float: left;
+    margin-left: 4rem;
+    margin-top: 4rem;
+    border: 1px solid $color-primary-lighter;
+    background-color: transparent;
+    & button {
+      padding: 1.6rem;
+      color: $color-primary;
+      font-size: 1.6rem;
+      cursor: pointer;
+      background-color: transparent;
+      border: 1px none;
+    }
+    & span {
+      padding: 1.4rem 1.8rem;
+      border-right: 1px solid $color-primary-lighter;
+      border-left: 1px solid $color-primary-lighter;
+    }
+  }
+  &__product-price {
+    float: left;
+    margin-left: 6rem;
+    margin-top: 5rem;
+  }
+  &__product-delete {
+    float: right;
+    margin-top: 3rem;
+    & button {
+      border: 1px none;
+      cursor: pointer;
+      background-color: transparent;
+      & i {
+        font-size: 2.4rem;
+        color: $color-primary;
+        padding: 2rem;
+      }
+    }
+  }
+
+  &__summary {
+    background-color: $color-primary;
+  }
+  &__summary-title {
+    border-bottom: 1px solid $color-primary-lightest;
+    text-align: center;
+    margin-bottom: 1.6rem;
+    margin-right: 1.6rem;
+    margin-left: 1.6rem;
+    padding: 1.6rem;
+  }
+  &__summary-detail {
+    margin-right: 1.6rem;
+    margin-left: 1.6rem;
+    & li {
+      margin-bottom: 0.8rem;
+      display: flex !important;
+      justify-content: space-between !important;
+    }
+  }
+  &__summary-submit {
+    background: #ffe180;
+    // display: block;
+    // padding: 1.6rem;
+  }
+}

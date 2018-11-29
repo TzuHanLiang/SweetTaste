@@ -1,0 +1,52 @@
+.cart-toggle {
+  position: fixed;
+  top: 15rem;
+  right: 10rem;
+  text-align: center;
+  color: #fff;
+  font-weight: 700;
+  z-index: 1502;
+  cursor: pointer;
+  transition: 0.3s all;
+  border-radius: 1rem;
+  // box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.2);
+  @include respond(tab-port) {
+    right: 2rem;
+    top: 1rem;
+  }
+  @include respond(tab-land) {
+    right: 5rem;
+  }
+
+  &__icon {
+    color: #3f5d45;
+    display: block;
+    font-weight: bold;
+    line-height: 8rem;
+    height: 8rem;
+    padding-left: 2.5rem;
+    padding-right: 1.5rem;
+    padding-top: 1rem;
+
+    &:hover,
+    &:active {
+      background: #3f5d45;
+      color: #fff;
+      border-radius: 1rem;
+    }
+
+    & i {
+      font-size: 2.4rem;
+    }
+  }
+  &__title {
+    color: white;
+    background-color: red;
+    font-size: 1.4rem;
+    position: relative;
+    padding: 2px 6px;
+    top: -1.8rem;
+    right: 0.8rem;
+    border-radius: 50%;
+  }
+}

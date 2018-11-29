@@ -1,34 +1,45 @@
 import React, { Component } from "react";
 
 import Navbar from "../../components/Navigation/Navbar/Navbar";
-import SideDrawer from "../../components/Navigation/SideDrawer/SideDrawer";
+import NavDrawer from "../../components/Navigation/NavDrawer/NavDrawer";
+import NavToggle from "../../components/Navigation/NavToggle/NavToggle";
+
+import Logo from "../../components/Logo/Logo";
 
 class layout extends Component {
   state = {
-    showSideDrawer: false
+    showNavigation: false,
+    showOrderSummary: false // 用來控制cartSideDrawer的開關
   };
-  sideDrawerClosedHandler = () => {
+
+  navigationClosedHandler = () => {
     this.setState({
-      showSideDrawer: false
+      showNavigation: false
     });
   };
-  sideDrawerToggledHandler = () => {
+  navigationToggledHandler = () => {
     this.setState(preState => {
-      return { showSideDrawer: !preState.showSideDrawer };
+      return {
+        showNavigation: !preState.showNavigation,
+        showOrderSummary: false
+      };
     });
   };
+
   render() {
     return (
       <>
-        <Navbar
-          show={this.state.showSideDrawer}
-          drawerToggleClicked={this.sideDrawerToggledHandler}
+        <NavToggle toggle={this.navigationToggledHandler} />
+        {/* logo */}
+        <Logo />
+        <Navbar show={this.state.showNavigation} />
+        <NavDrawer
+          show={this.state.showNavigation}
+          closed={this.navigationClosedHandler}
         />
-        <SideDrawer
-        //   show={this.state.showSideDrawer}
-        //   closed={this.sideDrawerClosedHandler}
-        />
-        <main style={{ "margin-top": "7.2rem" }}>{this.props.children}</main>
+        <main style={{ marginTop: "7.2rem", width: "100vw" }}>
+          {this.props.children}
+        </main>
       </>
     );
   }

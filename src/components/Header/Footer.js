@@ -1,39 +1,39 @@
 import React from "react";
-
+import LogoLight from "../../assets/img/logo-light.svg";
+import LogoType from "../../assets/img/logotype-lg-dark.svg";
+import icLine from "../../assets/img/ic-line@.svg";
+import icFacebook from "../../assets/img/ic-facebook.svg";
+import FooterTitle from "../../assets/img/footer__title.svg";
 const footer = () => {
   return (
-    <footer class="footer">
-      <div class="footer__subscribe">
+    <footer className="footer">
+      <div className="footer__subscribe">
         <div className="row">
           <div className="col-1-of-2">
-            <span className="footer__logo-box--1">
-              <img
-                src="./assets/img/logo-light.svg"
-                width="40"
-                height="40"
-                alt="Logo"
-                className="footer__logo--1"
-              />
-            </span>
-            <span className="heading__primary-main">訂閱你我的甜蜜郵件</span>
+            <div className="footer__register-title">
+              <span className="footer__logo-box--1">
+                <img src={LogoLight} alt="Logo" className="footer__logo--1" />
+              </span>
+              <span className="heading-primary--main">訂閱你我的甜蜜郵件</span>
+            </div>
           </div>
           <div className="col-1-of-2">
-            <form action="#" className="footer__email-form">
-              <i className="fas fa-envelope footer__email-icon--1" />
-              <input type="text" className="footer__email-input-text" />
+            <form action="#" className="footer__register-form">
+              <i className="fas fa-envelope footer__email-icon" />
+              <input type="text" className="footer__email-text" />
               <button className="footer__email-submit">
-                <i className="fas fa-arrow-right footer__email-icon--2" />
+                <i className="fas fa-arrow-right footer__arrow-icon" />
               </button>
             </form>
           </div>
         </div>
       </div>
       <div className="footer__contact-info">
-        <div class="row">
-          <div class="col-1-of-2">
-            <div class="footer__logo-box--2">
+        <div className="row">
+          <div className="col-1-of-2">
+            <div className="footer__logo-box--2">
               <img
-                src="./assets/img/logotype-lg-dark.svg"
+                src={LogoType}
                 width="171"
                 height="26"
                 alt="Logo"
@@ -58,10 +58,10 @@ const footer = () => {
               </li>
             </ul>
           </div>
-          <div class="col-1-of-2">
+          <div className="col-1-of-2">
             <div className="footer__title-box">
               <img
-                src="./assets/img/footer__title.svg"
+                src={FooterTitle}
                 witdt="59"
                 height="218"
                 alt="title"
@@ -75,22 +75,12 @@ const footer = () => {
         <ul className="footer__social-list">
           <li className="footer__social-item">
             <a href="#" className="footer__social-link">
-              <img
-                src="./assets/img/ic-line@.svg"
-                alt="Instagram"
-                width="32"
-                height="32"
-              />
+              <img src={icLine} alt="Instagram" width="32" height="32" />
             </a>
           </li>
           <li className="footer__social-item">
             <a href="#" className="footer__social-link">
-              <img
-                src="./assets/img/ic-facebook.svg"
-                alt="Fackbook"
-                width="32"
-                height="32"
-              />
+              <img src={icFacebook} alt="Fackbook" width="32" height="32" />
             </a>
           </li>
         </ul>
