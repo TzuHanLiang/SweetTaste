@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 
 class invoiceForm extends Component {
   state = {
@@ -114,12 +113,12 @@ class invoiceForm extends Component {
             </div>
           </div>
         </div>
-        <Link
-          to="/checkout/payment"
+        <button
+          onClick={this.props.clicked}
           className="btn btn--yellow heading-primary--medium "
         >
           確認結帳
-        </Link>
+        </button>
       </div>
     );
   }

@@ -94,9 +94,10 @@ class Products extends Component {
         encodeURIComponent(p) + "=" + encodeURIComponent(this.state.cart[0][p])
       );
     }
+    // queryParams.push("totalPrice=" + this.state.totalPrice);
     const queryString = queryParams.join("&");
     this.props.history.push({
-      pathname: "/order-summary",
+      pathname: "/checkout",
       search: "?" + queryString
     });
   };

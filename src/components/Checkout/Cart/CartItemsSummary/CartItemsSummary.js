@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 const orderSummary = props => {
   return (
@@ -21,12 +21,12 @@ const orderSummary = props => {
           <span>NT$ {props.totalPrice + props.shippingFee}</span>
         </li>
       </ul>
-      <Link
-        to="/checkout"
+      <button
+        onClick={props.checkoutContinue}
         className="btn heading-primary--medium order__summary-submit"
       >
         結帳
-      </Link>
+      </button>
     </div>
   );
 };

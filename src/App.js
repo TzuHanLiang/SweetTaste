@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import { Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import Layout from "./hoc/Layout/Layout";
 import Products from "./containers/Products/Products";
-import Order from "./containers/Order/Order";
+
 import Checkout from "./containers/Checkout/Checkout";
+// import ContactData from "./containers/Checkout/ContactData/ContactData";
 import Home from "./containers/Home/Home";
 
 import "./App.css";
@@ -14,10 +15,12 @@ class App extends Component {
     return (
       <div className="App">
         <Layout>
-          <Route path="/" exact component={Home} />
-          <Route path="/products" component={Products} />
-          <Route path="/order-summary" component={Order} />
-          <Route path="/checkout" component={Checkout} />
+          <Switch>
+            <Route path="/products" component={Products} />
+            <Route path="/checkout" component={Checkout} />
+            {/* <Route path="/contact-data" component={ContactData} /> */}
+            <Route path="/" exact component={Home} />
+          </Switch>
           <FooterModify />
         </Layout>
       </div>

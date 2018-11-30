@@ -9,7 +9,7 @@ const navigationItems = props => (
     </NavigationItem>
     <NavigationItem link="/products">甜點</NavigationItem>
     <NavigationItem link="/auth">登入/註冊</NavigationItem>
-    <NavigationItem link="/order-summary">
+    <NavigationItem link="/checkout">
       <i className="fas fa-shopping-cart" />
     </NavigationItem>
     {/* <NavigationItem link="/register">註冊</NavigationItem> */}
