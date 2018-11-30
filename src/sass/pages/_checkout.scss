@@ -2,6 +2,14 @@
   max-width: 94rem;
   margin: 0 auto;
   @include clearfix;
+  &__cancel {
+    position: absolute;
+    font-size: 2.4rem;
+    top: 11.5rem;
+    right: 3.2rem;
+    z-index: 2000;
+    color: $color-primary;
+  }
   &__form {
     background-color: $color-primary;
     width: 54rem;

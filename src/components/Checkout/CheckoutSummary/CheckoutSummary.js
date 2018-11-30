@@ -3,6 +3,9 @@ import React from "react";
 const checkoutSummary = props => {
   return (
     <div className="p-checkout__orderDetail">
+      <div className="checkout__cancel" onClick={props.checkoutCancel}>
+        <i className="far fa-times-circle" />
+      </div>
       <div className="p-checkout__orderDetail__order">
         <div className="p-checkout__orderDetail__section">
           <h2 className="p-checkout__orderDetail__section__title h-py-3">

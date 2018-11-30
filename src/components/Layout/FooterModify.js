@@ -22,7 +22,10 @@ const footerModify = () => {
               <i className="fas fa-envelope l-registered__form__icon" />
               <input type="text" className="l-registered__form__text" />
               <button className="l-registered__form__submit h-ml-auto">
-                <i className="fas fa-arrow-right" />
+                <i
+                  style={{ fontSize: "20px", color: "#3F5D45" }}
+                  className="fas fa-arrow-right"
+                />
               </button>
             </form>
           </div>
@@ -37,7 +40,7 @@ const footerModify = () => {
               </div>
               <ul className="l-footer__contact__content">
                 <li>
-                  <a href="tel:+0712345678"> 07-1234-5678</a>
+                  <a href="tel:+0712345678"> 02-1234-5678</a>
                 </li>
                 <li>
                   <a href="mailto:sweetaste@email.com">sweetaste@email.com</a>

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Backdrop from "../../UI/Backdrop/Backdrop";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 class cartSideDrawer extends Component {
   shouldComponentUpdate = (nextProps, nextState) => {
@@ -34,12 +34,18 @@ class cartSideDrawer extends Component {
           >
             總計: NT$ {totalPrice}
           </div>
-          <Link
+          {/* <Link
             className="btn btn--light heading-primary--medium"
             to="/order-summary"
           >
             檢視購物車
-          </Link>
+          </Link> */}
+          <button
+            className="btn btn--light heading-primary--medium"
+            onClick={this.props.continue}
+          >
+            檢視購物車
+          </button>
         </div>
       </div>
     );

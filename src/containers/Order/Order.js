@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import CartItem from "../../components/Order/CartItem/CartItem";
 import OrderSummary from "../../components/Order/OrderSummary/OrderSummary";
+import { Route } from "react-router-dom";
+import Checkout from "../Checkout/Checkout";
 
 class Order extends Component {
   state = {
@@ -25,6 +27,20 @@ class Order extends Component {
     shippingFee: 160,
     totalPrice: 660
   };
+
+  // 利用<Route/> Component 提供的props 取得query params 裡面的資料
+  componentDidMount = () => {
+    const query = new URLSearchParams(this.props.location.search);
+    const cartItem = {};
+    for (let params of query.entries()) {
+      // ["title": "蔓越梅蛋糕"]
+      cartItem[params[0]] = [params[1]];
+    }
+    const updateCart = [...this.state.cart];
+    updateCart.unshift(cartItem);
+    this.setState({ cart: updateCart });
+  };
+
   addCartItemHandler = item => {
     // 增加購物車裡面的物品
     const updateCart = [...this.state.cart];
@@ -107,6 +123,7 @@ class Order extends Component {
             />
           </div>
         </div>
+        <Route path={this.props.match.url + "/checkout"} Component={Checkout} />
       </div>
     );
   }

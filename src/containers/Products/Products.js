@@ -22,6 +22,7 @@ class Products extends Component {
     showNavigation: false
   };
   componentDidMount = () => {
+    console.log(this.props);
     axios
       .get("/products.json")
       .then(response => {
@@ -85,6 +86,20 @@ class Products extends Component {
       this.setState({ products: updateProducts });
     }
   };
+  // 利用query params傳購物車裡面的第一的商品到order頁面
+  purchasingContinueHandler = () => {
+    const queryParams = [];
+    for (let p in this.state.cart[0]) {
+      queryParams.push(
+        encodeURIComponent(p) + "=" + encodeURIComponent(this.state.cart[0][p])
+      );
+    }
+    const queryString = queryParams.join("&");
+    this.props.history.push({
+      pathname: "/order-summary",
+      search: "?" + queryString
+    });
+  };
 
   render() {
     let products = this.state.error ? (
@@ -119,6 +134,7 @@ class Products extends Component {
           show={this.state.showOrderSummary}
           closed={this.orderSummaryClosedHandler}
           totalPrice={this.state.totalPrice}
+          continue={this.purchasingContinueHandler}
         >
           {cart}
         </CartSideDrawer>

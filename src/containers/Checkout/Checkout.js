@@ -5,8 +5,6 @@ import DeliveryForm from "../../components/Checkout/DeliveryForm/DeliveryForm";
 import PaymentForm from "../../components/Checkout/PaymentForm/PaymentForm";
 import InvoiceForm from "../../components/Checkout/InvoiceForm/InvoiceForm";
 
-import { BrowserRouter as Router, Route } from "react-router-dom";
-
 class Checkout extends Component {
   state = {
     customer: {
@@ -45,11 +43,14 @@ class Checkout extends Component {
   stepProgressHandler = newStep => {
     this.setState({ step: newStep });
   };
+  checkoutCancelledHandler = () => {
+    this.props.history.goBack();
+  };
 
   render() {
     return (
-      <div className="checkout">
-        <OrderSummary />
+      <div className="checkout h-pt-3">
+        <OrderSummary checkoutCancel={this.checkoutCancelledHandler} />
         {(() => {
           switch (this.state.step) {
             case 1:
