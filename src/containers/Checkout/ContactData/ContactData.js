@@ -52,7 +52,12 @@ class ContactData extends Component {
   render() {
     return (
       <div className="checkout h-pt-3">
-        <OrderSummary checkoutCancel={this.checkoutCancelledHandler} />
+        {/* {console.log(this.props)} */}
+        <OrderSummary
+          cart={this.props.cart}
+          totalPrice={this.props.totalPrice}
+          checkoutCancel={this.checkoutCancelledHandler}
+        />
         {(() => {
           switch (this.state.step) {
             case 1:
