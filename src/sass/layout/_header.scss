@@ -2,6 +2,13 @@
   max-width: 940px;
   margin-right: auto;
   margin-left: auto;
+  & ul {
+    & li {
+      & img {
+        height: 49.6rem;
+      }
+    }
+  }
 
   &__container {
     display: flex;

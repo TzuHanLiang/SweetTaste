@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 
-import OrderSummary from "../../components/Checout/OrderSummary/OrderSummary";
-import DeliveryForm from "../../components/Checout/DeliveryForm/DeliveryForm";
-import PaymentForm from "../../components/Checout/PaymentForm/PaymentForm";
-import InvoiceForm from "../../components/Checout/InvoiceForm/InvoiceForm";
+import OrderSummary from "../../components/Checkout/CheckoutSummary/CheckoutSummary";
+import DeliveryForm from "../../components/Checkout/DeliveryForm/DeliveryForm";
+import PaymentForm from "../../components/Checkout/PaymentForm/PaymentForm";
+import InvoiceForm from "../../components/Checkout/InvoiceForm/InvoiceForm";
 
 import { BrowserRouter as Router, Route } from "react-router-dom";
 

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import HeaderImage from "../../components/Header/HeaderImage";
+import HeaderImage from "../../components/Layout/HeaderImage";
 import ProductCard from "../../components/Product/ProductCard/ProductCard";
 import ProductMenuList from "../../components/Product/ProductMenu/ProductMenusList/ProductMenusList";
 import CartSideDrawer from "../../components/Product/CartSideDrawer/CartSideDrawer";

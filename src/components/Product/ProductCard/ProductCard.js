@@ -24,19 +24,19 @@ class productCard extends Component {
           </div> */}
         </div>
         <div className="product__card__info">
-          <div className="row">
-            <div className="col-1-of-2">
-              <div className="product__card__title heading-primary--sm heading-primary--sm--light">
-                {product.title}
-              </div>
-            </div>
-            <div className="col-1-of-2">
-              <div className="product__card__price heading-primary--sm">
-                NT$ {product.price}
-              </div>
-            </div>
+          {/* <div className="row">
+            <div className="col-1-of-2"> */}
+          <div className="product__card__title heading-primary--sm heading-primary--sm--light">
+            {product.title}
+          </div>
+          {/* </div> */}
+          {/* <div className="col-1-of-2"> */}
+          <div className="product__card__price heading-primary--sm">
+            NT$ {product.price}
           </div>
         </div>
+        {/* </div>
+        </div> */}
         <button
           className="btn btn--light heading-primary--medium"
           onClick={() => clicked(product)}
