@@ -6,8 +6,6 @@ import CartSideDrawer from "../../components/Product/CartSideDrawer/CartSideDraw
 import CartToggle from "../../components/Product/CartToggle/CartToggle";
 import CartItem from "../../components/Product/CartItem/CartItem";
 import Spinner from "../../components/UI/Spinner/Spinner";
-// import { Route } from "react-router-dom";
-// import Checkout from "../Checkout/Checkout";
 
 import axios from "../../axios";
 
@@ -15,56 +13,18 @@ class Products extends Component {
   state = {
     products: null,
     totalProducts: null,
-    // cart: [], //
-    // count: 0,
-    // totalPrice: 0,
     loading: false,
-    // error: false,
     showNavigation: false
   };
   componentDidMount = () => {
-    console.log(this.props);
     axios
       .get("/products.json")
       .then(response => {
-        console.log(response);
         this.setState({ totalProducts: Object.values(response.data) });
         this.setState({ products: Object.values(response.data) });
-
-        //把所有商品的資料往上傳回 App.js
-        this.props.addProducts(this.state.totalProducts);
       })
       .catch(error => this.setState({ error: true }));
   };
-
-  // addProductHandler = product => {
-  //   // 更新購物車裡面的數量(同一品項新增一個也加一)
-  //   const oldCount = this.state.count;
-  //   const updateCount = oldCount + 1;
-
-  //   // 更新購物車裡面的物品
-  //   const updateCart = [...this.state.cart];
-  //   const index = updateCart.findIndex(item => item.id === product.id);
-  //   if (index === -1) {
-  //     product.count = 1;
-  //     updateCart.push(product);
-  //   } else {
-  //     const oldCount = updateCart[index].count;
-  //     const updateCount = oldCount + 1;
-  //     updateCart[index].count = updateCount;
-  //   }
-
-  //   // 更新總價
-  //   const oldPrice = this.state.totalPrice;
-  //   const priceAddition = product.price;
-  //   const updatePrice = oldPrice + priceAddition;
-
-  //   this.setState({
-  //     cart: updateCart,
-  //     count: updateCount,
-  //     totalPrice: updatePrice
-  //   });
-  // };
 
   orderSummaryToggledHandler = () => {
     this.setState(preState => {
@@ -115,7 +75,6 @@ class Products extends Component {
       <Spinner />
     );
     if (this.state.products) {
-      // this.props.addProducts(this.state.totalProducts);
       products = this.state.products.map(product => {
         return (
           <ProductCard
@@ -154,15 +113,6 @@ class Products extends Component {
             <div className="col-2-of-3">{products}</div>
           </div>
         </div>
-        {/* <Route
-          path="/checkout"
-          render={() => (
-            <Checkout
-              cart={this.state.cart}
-              totalPrice={this.state.totalPrice}
-            />
-          )}
-        /> */}
       </>
     );
   }

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import OrderSummary from "../../../components/Checkout/CheckoutSummary/CheckoutSummary";
+import CheckoutSummary from "../../../components/Checkout/CheckoutSummary/CheckoutSummary";
 import DeliveryForm from "../../../components/Checkout/DeliveryForm/DeliveryForm";
 import PaymentForm from "../../../components/Checkout/PaymentForm/PaymentForm";
 import InvoiceForm from "../../../components/Checkout/InvoiceForm/InvoiceForm";
@@ -40,6 +40,17 @@ class ContactData extends Component {
     step: 1
   };
 
+  componentDidMount = () => {
+    const query = new URLSearchParams(this.props.location.search);
+    let shippingFee = 0;
+    for (let params of query.entries()) {
+      if (params[0] === "shippingFee") {
+        shippingFee = +params[1];
+      }
+    }
+    this.setState({ shippingFee });
+  };
+
   stepProgressHandler = newStep => {
     this.setState({ step: newStep });
   };
@@ -53,10 +64,11 @@ class ContactData extends Component {
     return (
       <div className="checkout h-pt-3">
         {/* {console.log(this.props)} */}
-        <OrderSummary
+        <CheckoutSummary
           cart={this.props.cart}
           totalPrice={this.props.totalPrice}
           checkoutCancel={this.checkoutCancelledHandler}
+          shippingFee={this.state.shippingFee}
         />
         {(() => {
           switch (this.state.step) {

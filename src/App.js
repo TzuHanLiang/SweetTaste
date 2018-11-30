@@ -12,29 +12,10 @@ import FooterModify from "./components/Layout/FooterModify";
 
 class App extends Component {
   state = {
-    // products: null,
-    totalProducts: null,
     cart: [], //
     count: 0,
     totalPrice: 0
-    // loading: false,
-    // error: false
   };
-  // componentWillMount = () => {
-  //   axios
-  //     .get("/products.json")
-  //     .then(response => {
-  //       console.log(response);
-  //       this.setState({ totalProducts: Object.values(response.data) });
-  //       // this.setState({ products: Object.values(response.data) });
-  //     })
-  //     .catch(error => this.setState({ error: true }));
-  // };
-
-  componentDidUpdate = () => {
-    console.log(this.state.totalProducts);
-  };
-
   //讓在 Product.js fetch到的商品資料傳過來(只是試試看)
   addProductsHandler = products => {
     this.setState({ totalProducts: products });
