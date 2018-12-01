@@ -37,7 +37,7 @@ class invoiceForm extends Component {
                 value={config.value}
                 label={config.elementLabel}
                 changed={event =>
-                  this.props.inputChanged(event, formElement[1].id[i])
+                  this.props.inputChanged(event, formElement[1], i)
                 }
                 show={
                   formElement[1].id === "cityAndArea" && i === 1 ? false : true

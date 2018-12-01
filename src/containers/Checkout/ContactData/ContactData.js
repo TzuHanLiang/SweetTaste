@@ -202,14 +202,19 @@ class ContactData extends Component {
     const updatedOrderForm = {
       ...this.state.orderForm
     };
-    const updatedFormElement = i
-      ? {
-          ...updatedOrderForm[inputIdentifier][i]
-        }
-      : { ...updatedOrderForm[inputIdentifier] };
-    updatedFormElement.value = event.target.value;
+    let updatedFormElement = null;
+
+    if (i === 0 || i) {
+      updatedFormElement = [...updatedOrderForm[inputIdentifier]];
+      updatedFormElement[i].value = event.target.value;
+    } else {
+      updatedFormElement = { ...updatedOrderForm[inputIdentifier] };
+      updatedFormElement.value = event.target.value;
+    }
+
     updatedOrderForm[inputIdentifier] = updatedFormElement;
     this.setState({ orderForm: updatedOrderForm });
+    // console.log(updatedOrderForm, { ...this.state.orderForm });
   };
 
   orderHandler = () => {
@@ -224,40 +229,6 @@ class ContactData extends Component {
       products: this.props.cart,
       price: this.props.totalPrice,
       orderData: formData
-
-      //   products: this.props.cart,
-      //   price: this.props.totalPrice,
-      //   customer: {
-      //     name: {
-      //       firstname: "梁",
-      //       lastname: "紫涵"
-      //     },
-      //     tel: "0989151529",
-      //     email: "crocodilestear@gmail.com",
-      //     address: {
-      //       city: "台北市",
-      //       area: "大安區",
-      //       street: "幸福路38號"
-      //     },
-      //     creditcard: "4073 0112 4518 1143",
-      //     cardowner: {
-      //       firstname: "梁",
-      //       lastname: "紫涵"
-      //     },
-      //     duedate: {
-      //       year: "2032",
-      //       month: "03"
-      //     },
-      //     securitycode: "220",
-      //     invioce: {
-      //       address: {
-      //         city: null,
-      //         area: null,
-      //         street: null
-      //       },
-      //       email: "crocodilestear@gmail.com",
-      //       componytaxid: "223100"
-      //     }
     };
     axios
       .post("/orders.json", order)

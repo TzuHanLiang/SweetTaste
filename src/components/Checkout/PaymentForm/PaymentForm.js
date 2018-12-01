@@ -26,7 +26,7 @@ const paymentForm = props => {
                 elementConfig={config.elementConfig}
                 value={config.value}
                 label={config.elementLabel}
-                changed={event => props.inputChanged(event, formElement.id[i])}
+                changed={event => props.inputChanged(event, formElement.id, i)}
                 show={i === 1 ? false : true}
               />
             </div>
