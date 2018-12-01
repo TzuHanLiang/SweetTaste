@@ -17,15 +17,19 @@ const deliveryForm = props => {
     } else {
       return (
         <div className="checkout__input-box" key={formElement.id}>
-          <div className="checkout__input-float">
-            <Input
-              elementType={formElement.config.elementType}
-              elementConfig={formElement.config.elementConfig}
-              value={formElement.config.value}
-              // changed={event => this.inputChangedHandler(event, formElement.id)}
-              show={formElement.id === "area" ? false : true}
-            />
-          </div>
+          {formElement.config.map((config, i) => (
+            <div className="checkout__input-float" key={formElement.id + i}>
+              <Input
+                elementType={config.elementType}
+                elementConfig={config.elementConfig}
+                value={config.value}
+                // changed={event => this.inputChangedHandler(event, formElementid)}
+                show={
+                  formElement.id === "cityAndArea" && i === 1 ? false : true
+                }
+              />
+            </div>
+          ))}
         </div>
       );
     }
@@ -84,6 +88,7 @@ const deliveryForm = props => {
           </div>
         </div> */}
         {form}
+        {console.log(props.formElementsArray)}
       </div>
       <button
         onClick={() => props.changeStep(2)}

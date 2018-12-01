@@ -10,22 +10,24 @@ import Spinner from "../../../components/UI/Spinner/Spinner";
 class ContactData extends Component {
   state = {
     orderForm: {
-      firstname: {
-        elementType: "input",
-        elementConfig: {
-          type: "text",
-          placeholder: "梁"
+      name: [
+        {
+          elementType: "input",
+          elementConfig: {
+            type: "text",
+            placeholder: "梁"
+          },
+          value: ""
         },
-        value: ""
-      },
-      lastname: {
-        elementType: "input",
-        elementConfig: {
-          type: "text",
-          placeholder: "紫涵"
-        },
-        value: ""
-      },
+        {
+          elementType: "input",
+          elementConfig: {
+            type: "text",
+            placeholder: "紫涵"
+          },
+          value: ""
+        }
+      ],
       tel: {
         elementType: "input",
         elementConfig: {
@@ -34,22 +36,24 @@ class ContactData extends Component {
         },
         value: ""
       },
-      city: {
-        elementType: "input",
-        elementConfig: {
-          type: "text",
-          placeholder: "台北市"
+      cityAndArea: [
+        {
+          elementType: "input",
+          elementConfig: {
+            type: "text",
+            placeholder: "台北市"
+          },
+          value: ""
         },
-        value: ""
-      },
-      area: {
-        elementType: "input",
-        elementConfig: {
-          type: "text",
-          placeholder: "大安區"
-        },
-        value: ""
-      },
+        {
+          elementType: "input",
+          elementConfig: {
+            type: "text",
+            placeholder: "大安區"
+          },
+          value: ""
+        }
+      ],
       street: {
         elementType: "input",
         elementConfig: {
@@ -74,22 +78,24 @@ class ContactData extends Component {
         },
         value: ""
       },
-      cardOwnerFN: {
-        elementType: "input",
-        elementConfig: {
-          type: "text",
-          placeholder: "梁"
+      cardOwner: [
+        {
+          elementType: "input",
+          elementConfig: {
+            type: "text",
+            placeholder: "梁"
+          },
+          value: ""
         },
-        value: ""
-      },
-      cardOwnerLN: {
-        elementType: "input",
-        elementConfig: {
-          type: "text",
-          placeholder: "紫涵"
-        },
-        value: ""
-      },
+        {
+          elementType: "input",
+          elementConfig: {
+            type: "text",
+            placeholder: "紫涵"
+          },
+          value: ""
+        }
+      ],
       dueDateY: {
         elementType: "input",
         elementConfig: {
@@ -114,22 +120,24 @@ class ContactData extends Component {
         },
         value: ""
       },
-      iCity: {
-        elementType: "input",
-        elementConfig: {
-          type: "text",
-          placeholder: "台北市"
+      iCityAndArea: [
+        {
+          elementType: "input",
+          elementConfig: {
+            type: "text",
+            placeholder: "台北市"
+          },
+          value: ""
         },
-        value: ""
-      },
-      iArea: {
-        elementType: "input",
-        elementConfig: {
-          type: "text",
-          placeholder: "大安區"
-        },
-        value: ""
-      },
+        {
+          elementType: "input",
+          elementConfig: {
+            type: "text",
+            placeholder: "大安區"
+          },
+          value: ""
+        }
+      ],
       iStreet: {
         elementType: "input",
         elementConfig: {
@@ -236,7 +244,7 @@ class ContactData extends Component {
         config: this.state.orderForm[key]
       });
     }
-    const deliveryForm = formElementsArray.slice(0, 6);
+    const deliveryForm = formElementsArray.slice(0, 4);
     const paymentForm = formElementsArray.slice(6, 12);
     const invoiceForm = [...formElementsArray].splice(0, 12);
     let form = (
