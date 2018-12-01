@@ -11,7 +11,7 @@
     width: 100%;
     color: $color-primary;
     //Change for the <button> element
-    border: none;
+    // border: none;
     cursor: pointer;
   }
 
@@ -51,6 +51,22 @@
       outline: none;
     }
   }
+  &--yellow-b {
+    border: 1px solid $color-primary;
+    color: $color-primary;
+
+    &:hover {
+      border: 1px solid $color-secondary-light;
+      background-color: $color-secondary-dark;
+      color: $color-primary;
+    }
+    &.active {
+      border: 1px solid $color-secondary-light;
+      background-color: $color-secondary-light;
+      color: $color-primary;
+    }
+  }
+
   &::after {
     content: "";
     display: inline-block;

@@ -5,11 +5,12 @@ class checkoutSummary extends Component {
 
   render() {
     const productList = this.props.cart.map(product => (
-      <li className="h-m-3 h-flex">
+      <li className="h-m-3 h-flex" key={product.id}>
         <div
           style={{
             height: "110px",
-            width: "165px",
+            maxWidth: "165px",
+            backgroundSize: "cover",
             backgroundImage: `url(${product.img})`
           }}
           className="p-checkout__orderDetail__section__productList__img"

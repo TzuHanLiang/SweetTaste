@@ -16,15 +16,24 @@ class Products extends Component {
     loading: false,
     showNavigation: false
   };
-  componentDidMount = () => {
+  componentDidMount() {
     axios
       .get("/products.json")
-      .then(response => {
-        this.setState({ totalProducts: Object.values(response.data) });
-        this.setState({ products: Object.values(response.data) });
+      .then(res => {
+        const fetchedProducts = [];
+        for (let key in res.data) {
+          fetchedProducts.push({
+            ...res.data[key],
+            productNo: key
+          });
+        }
+        this.setState({
+          totalProducts: fetchedProducts,
+          products: fetchedProducts
+        });
       })
       .catch(error => this.setState({ error: true }));
-  };
+  }
 
   orderSummaryToggledHandler = () => {
     this.setState(preState => {
@@ -91,7 +100,7 @@ class Products extends Component {
     });
     return (
       <>
-        <HeaderImage />
+        <HeaderImage img="https://bit.ly/2Qodh3Z" />
         <CartToggle
           toggle={this.orderSummaryToggledHandler}
           show

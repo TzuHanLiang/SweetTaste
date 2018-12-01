@@ -1,14 +1,19 @@
 import React, { Component } from "react";
 import { Route } from "react-router-dom";
+//layout
 import Layout from "./hoc/Layout/Layout";
-import Products from "./containers/Products/Products";
+import FooterModify from "./components/Layout/FooterModify";
 
+//containers (pages)
+import Products from "./containers/Products/Products";
 import Checkout from "./containers/Checkout/Checkout";
 import ContactData from "./containers/Checkout/ContactData/ContactData";
+import Orders from "./containers/Orders/Orders";
 import Home from "./containers/Home/Home";
 
+import CheckoutSuccess from "./components/Checkout/CheckoutSuccess";
+
 import "./App.css";
-import FooterModify from "./components/Layout/FooterModify";
 
 class App extends Component {
   state = {
@@ -139,6 +144,8 @@ class App extends Component {
               />
             )}
           />
+          <Route path="/checkout-success" exact component={CheckoutSuccess} />
+          <Route path="/orders" exact component={Orders} />
           <Route path="/" exact component={Home} />
           {/* </Switch> */}
           <FooterModify />

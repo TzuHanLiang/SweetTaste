@@ -11,6 +11,11 @@ ul {
 }
 
 .heading-primary {
+  &--large-g {
+    font-weight: bold;
+    font-size: 4.8rem;
+    font-family: Times;
+  }
   &--large {
     font-weight: 600;
     font-size: 3.6rem;

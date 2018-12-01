@@ -99,6 +99,11 @@ body {
 ul {
   list-style: none; }
 
+.heading-primary--large-g {
+  font-weight: bold;
+  font-size: 4.8rem;
+  font-family: Times; }
+
 .heading-primary--large {
   font-weight: 600;
   font-size: 3.6rem;
@@ -1436,7 +1441,6 @@ ul {
   display: block;
   width: 100%;
   color: #3f5d45;
-  border: none;
   cursor: pointer; }
 
 .btn:active, .btn:focus {
@@ -1461,6 +1465,18 @@ ul {
   .btn--yellow:active, .btn--yellow:focus {
     background-color: #ffb949;
     outline: none; }
+
+.btn--yellow-b {
+  border: 1px solid #3f5d45;
+  color: #3f5d45; }
+  .btn--yellow-b:hover {
+    border: 1px solid #ffe180;
+    background-color: #ffb949;
+    color: #3f5d45; }
+  .btn--yellow-b.active {
+    border: 1px solid #ffe180;
+    background-color: #ffe180;
+    color: #3f5d45; }
 
 .btn::after {
   content: "";
@@ -1892,6 +1908,12 @@ ul {
   height: 100%;
   width: auto;
   align-items: center; }
+  .Navigation__item a:hover,
+  .Navigation__item a:active {
+    background: #3f5d45;
+    color: #fff; }
+  .Navigation__item a.active {
+    border-bottom: 1px solid #3f5d45; }
   @media only screen and (max-width: 56.25em) {
     .Navigation__item {
       padding: 1rem;
@@ -1909,9 +1931,6 @@ ul {
   text-align: -webkit-match-parent;
   padding: 3rem;
   cursor: pointer; }
-  .Navigation__link:hover, .Navigation__link:active, .Navigation__link:link:hover, .Navigation__link:link:active, .Navigation__link:visited:hover, .Navigation__link:visited:active {
-    background: #3f5d45;
-    color: #fff; }
   @media only screen and (max-width: 56.25em) {
     .Navigation__link, .Navigation__link:link, .Navigation__link:visited {
       padding: 0;
@@ -2051,6 +2070,25 @@ ul {
     content: "";
     display: table;
     clear: both; }
+  .checkout__success {
+    position: relative; }
+    .checkout__success__title {
+      width: 38rem;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      position: absolute;
+      top: 55%;
+      right: 50%;
+      text-align: center; }
+    .checkout__success__progress {
+      width: 20rem;
+      margin: 2rem auto; }
+      .checkout__success__progress li {
+        font-size: 2rem; }
+    .checkout__success__btnGroup {
+      margin: 3rem; }
   .checkout__cancel {
     position: absolute;
     font-size: 2.4rem;
