@@ -26,6 +26,8 @@
   &--light {
     background-color: #eaf0ed;
     color: $color-primary;
+    border: none;
+    border-bottom: 1px solid $color-primary-lighter;
 
     &:hover {
       background-color: $color-primary-lighter;
@@ -44,6 +46,7 @@
   &--yellow {
     background-color: $color-secondary-light;
     color: $color-primary;
+    border: none;
 
     &:active,
     &:focus {

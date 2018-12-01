@@ -1449,7 +1449,9 @@ ul {
 
 .btn--light {
   background-color: #eaf0ed;
-  color: #3f5d45; }
+  color: #3f5d45;
+  border: none;
+  border-bottom: 1px solid #ccdbd4; }
   .btn--light:hover {
     background-color: #ccdbd4; }
 
@@ -1461,7 +1463,8 @@ ul {
 
 .btn--yellow {
   background-color: #ffe180;
-  color: #3f5d45; }
+  color: #3f5d45;
+  border: none; }
   .btn--yellow:active, .btn--yellow:focus {
     background-color: #ffb949;
     outline: none; }
@@ -1988,13 +1991,19 @@ ul {
     opacity: 0; }
 
 .order {
-  margin: 0 14rem;
+  margin: 8rem 14rem;
   text-align: center; }
+  @media only screen and (max-width: 75em) {
+    .order {
+      margin: 8rem 6rem; } }
   .order__productList {
     background-color: #ccdbd4;
     text-align: center;
     padding: 1.6rem;
     margin-bottom: 2rem; }
+    @media only screen and (max-width: 56.25em) {
+      .order__productList {
+        margin: 0; } }
   .order__product {
     width: 100%;
     height: 19rem;
@@ -2065,7 +2074,7 @@ ul {
 
 .checkout {
   max-width: 94rem;
-  margin: 0 auto; }
+  margin: 10rem auto; }
   .checkout::after {
     content: "";
     display: table;
@@ -2092,17 +2101,38 @@ ul {
   .checkout__cancel {
     position: absolute;
     font-size: 2.4rem;
-    top: 11.5rem;
-    right: 3.2rem;
-    z-index: 2000;
+    top: 20%;
+    right: 16%;
+    z-index: 1500;
     color: #3f5d45; }
+    @media only screen and (max-width: 75em) {
+      .checkout__cancel {
+        top: 20%;
+        right: 5%; } }
+    @media only screen and (max-width: 56.25em) {
+      .checkout__cancel {
+        top: 18%;
+        right: 5%; } }
   .checkout__form {
     background-color: #3f5d45;
     width: 54rem;
     position: relative;
     float: left; }
+    @media only screen and (max-width: 56.25em) {
+      .checkout__form {
+        width: 50%;
+        margin-left: 5%;
+        float: left; } }
+    @media only screen and (max-width: 37.5em) {
+      .checkout__form {
+        width: 100%;
+        margin-left: 0;
+        margin-top: 3rem; } }
   .checkout__form-section {
     padding: 3rem; }
+    @media only screen and (max-width: 37.5em) {
+      .checkout__form-section {
+        width: 100%; } }
   .checkout__form-title {
     height: 7.2rem;
     display: inline-block; }
@@ -2142,6 +2172,9 @@ ul {
       color: #8da291;
       padding-top: 2rem;
       padding-bottom: 2rem; }
+      .checkout__input input:focus {
+        outline: none;
+        background-color: #fff; }
   .checkout__input-float {
     float: left;
     width: 50%; }
@@ -2161,6 +2194,14 @@ ul {
 .p-checkout__orderDetail__order {
   float: right;
   width: 40%; }
+  @media only screen and (max-width: 56.25em) {
+    .p-checkout__orderDetail__order {
+      width: 35%;
+      margin-right: 5%;
+      float: right; } }
+  @media only screen and (max-width: 37.5em) {
+    .p-checkout__orderDetail__order {
+      display: none; } }
 
 .p-checkout__orderDetail__section__title {
   font-size: 2.4rem;

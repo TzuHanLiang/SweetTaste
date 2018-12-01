@@ -81,7 +81,13 @@ const paymentForm = props => {
             </label>
             <input type="text" placeholder="月" className="e-form__control" />
           </div>
-          <div className="checkout__input checkout__input-float u-margin-top-sm">
+          <div className="checkout__input checkout__input-float ">
+            <label
+              style={{ color: "#3F5D45" }}
+              className="heading-primary--sm--light--lightest"
+            >
+              年
+            </label>
             <input type="text" placeholder="年" className="e-form__control" />
           </div>
           <div className="checkout__input-box">

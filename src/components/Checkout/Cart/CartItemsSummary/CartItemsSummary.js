@@ -23,7 +23,7 @@ const orderSummary = props => {
       </ul>
       <button
         onClick={props.checkoutContinue}
-        className="btn heading-primary--medium order__summary-submit"
+        className="btn heading-primary--medium btn--yellow"
       >
         結帳
       </button>

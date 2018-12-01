@@ -1,6 +1,35 @@
 import React from "react";
+import Input from "../../UI/Input/Input";
 
 const deliveryForm = props => {
+  let form = props.formElementsArray.map(formElement => {
+    if (formElement.id === "tel" || formElement.id === "street") {
+      return (
+        <div className="checkout__input-box" key={formElement.id}>
+          <Input
+            elementType={formElement.config.elementType}
+            elementConfig={formElement.config.elementConfig}
+            value={formElement.config.value}
+            // changed={event => this.inputChangedHandler(event, formElement.id)}
+          />
+        </div>
+      );
+    } else {
+      return (
+        <div className="checkout__input-box" key={formElement.id}>
+          <div className="checkout__input-float">
+            <Input
+              elementType={formElement.config.elementType}
+              elementConfig={formElement.config.elementConfig}
+              value={formElement.config.value}
+              // changed={event => this.inputChangedHandler(event, formElement.id)}
+              show={formElement.id === "area" ? false : true}
+            />
+          </div>
+        </div>
+      );
+    }
+  });
   return (
     <div className="checkout__form">
       <div className="checkout__form-section">
@@ -27,67 +56,23 @@ const deliveryForm = props => {
             <i className="far fa-circle" />
           </li>
         </ul>
-        <div className="checkout__input-box">
-          <div className="checkout__input checkout__input-float">
-            <label
-              className="heading-primary--sm--light--lightest"
-              htmlFor="firstName"
-            >
-              姓氏
-            </label>
-            <input
-              type="text"
-              placeholder="梁"
-              id="firstName"
-              className="e-form__control"
-            />
+        {/* <div className="checkout__input-box">
+          <div className="checkout__input-float">
+            <Input elementType="input" label="姓氏" show />
           </div>
-          <div className="checkout__input checkout__input-float">
-            <label
-              className="heading-primary--sm--light--lightest"
-              htmlFor="firstName"
-            >
-              姓名
-            </label>
-            <input
-              type="text"
-              placeholder="紫涵"
-              id="firstName"
-              className="e-form__control"
-            />
+          <div className="checkout__input-float">
+            <Input elementType="input" label="姓名" show />
           </div>
         </div>
         <div className="checkout__input-box">
-          <div className="checkout__input ">
-            <label
-              className="heading-primary--sm--light--lightest"
-              htmlFor="tel"
-            >
-              電話
-            </label>
-            <input
-              type="text"
-              placeholder="0989151529"
-              id="tel"
-              className="e-form__control"
-            />
-          </div>
+          <Input elementType="input" label="電話" show />
         </div>
         <div className="checkout__input-box">
-          <div className="checkout__input checkout__input-float">
-            <label className="heading-primary--sm--light--lightest">地址</label>
-            <input
-              type="text"
-              placeholder="台北市"
-              className="e-form__control"
-            />
+          <div className="checkout__input-float">
+            <Input elementType="input" label="地址" show />
           </div>
-          <div className="checkout__input checkout__input-float u-margin-top-sm">
-            <input
-              type="text"
-              placeholder="大安區"
-              className="e-form__control"
-            />
+          <div className="checkout__input-float">
+            <Input elementType="input" label="地址" show={false} />
           </div>
           <div className="checkout__input">
             <input
@@ -97,7 +82,8 @@ const deliveryForm = props => {
               className="e-form__control"
             />
           </div>
-        </div>
+        </div> */}
+        {form}
       </div>
       <button
         onClick={() => props.changeStep(2)}

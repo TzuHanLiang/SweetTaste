@@ -1,11 +1,19 @@
 .order {
-  margin: 0 14rem;
+  margin: 8rem 14rem;
   text-align: center;
+  @include respond(tab-land) {
+    margin: 8rem 6rem;
+  }
+  @include respond(tab-port) {
+  }
   &__productList {
     background-color: $color-primary-lighter;
     text-align: center;
     padding: 1.6rem;
     margin-bottom: 2rem;
+    @include respond(tab-port) {
+      margin: 0;
+    }
   }
   &__product {
     width: 100%;

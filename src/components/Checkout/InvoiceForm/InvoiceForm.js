@@ -34,7 +34,13 @@ class invoiceForm extends Component {
           <label className="heading-primary--sm--light--lightest">地址</label>
           <input type="text" placeholder="台北市" className="e-form__control" />
         </div>
-        <div className="checkout__input checkout__input-float u-margin-top-sm">
+        <div className="checkout__input checkout__input-float ">
+          <label
+            style={{ color: "#3f5d45" }}
+            className="heading-primary--sm--light--lightest"
+          >
+            地址
+          </label>
           <input type="text" placeholder="大安區" className="e-form__control" />
         </div>
         <div className="checkout__input">

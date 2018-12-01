@@ -9,35 +9,151 @@ import Spinner from "../../../components/UI/Spinner/Spinner";
 
 class ContactData extends Component {
   state = {
-    name: {
-      firstname: "",
-      lastname: ""
-    },
-    tel: "",
-    email: "",
-    address: {
-      city: "",
-      area: "",
-      street: ""
-    },
-    creditcard: "",
-    cardowner: {
-      firstname: "",
-      lastname: ""
-    },
-    duedate: {
-      year: "",
-      month: ""
-    },
-    securitycode: "",
-    invioce: {
-      address: {
-        city: "",
-        area: "",
-        street: ""
+    orderForm: {
+      firstname: {
+        elementType: "input",
+        elementConfig: {
+          type: "text",
+          placeholder: "梁"
+        },
+        value: ""
       },
-      email: "",
-      componytaxid: ""
+      lastname: {
+        elementType: "input",
+        elementConfig: {
+          type: "text",
+          placeholder: "紫涵"
+        },
+        value: ""
+      },
+      tel: {
+        elementType: "input",
+        elementConfig: {
+          type: "text",
+          placeholder: "0989151529"
+        },
+        value: ""
+      },
+      city: {
+        elementType: "input",
+        elementConfig: {
+          type: "text",
+          placeholder: "台北市"
+        },
+        value: ""
+      },
+      area: {
+        elementType: "input",
+        elementConfig: {
+          type: "text",
+          placeholder: "大安區"
+        },
+        value: ""
+      },
+      street: {
+        elementType: "input",
+        elementConfig: {
+          type: "text",
+          placeholder: "幸福路38號"
+        },
+        value: ""
+      },
+      email: {
+        elementType: "input",
+        elementConfig: {
+          type: "email",
+          placeholder: "crocodilestear@gmail.com"
+        },
+        value: ""
+      },
+      creditcard: {
+        elementType: "input",
+        elementConfig: {
+          type: "text",
+          placeholder: "4073 0112 4518 1143"
+        },
+        value: ""
+      },
+      cardOwnerFN: {
+        elementType: "input",
+        elementConfig: {
+          type: "text",
+          placeholder: "梁"
+        },
+        value: ""
+      },
+      cardOwnerLN: {
+        elementType: "input",
+        elementConfig: {
+          type: "text",
+          placeholder: "紫涵"
+        },
+        value: ""
+      },
+      dueDateY: {
+        elementType: "input",
+        elementConfig: {
+          type: "text",
+          placeholder: "2032"
+        },
+        value: ""
+      },
+      dueDateM: {
+        elementType: "input",
+        elementConfig: {
+          type: "text",
+          placeholder: "03"
+        },
+        value: ""
+      },
+      securityCode: {
+        elementType: "input",
+        elementConfig: {
+          type: "text",
+          placeholder: "220"
+        },
+        value: ""
+      },
+      iCity: {
+        elementType: "input",
+        elementConfig: {
+          type: "text",
+          placeholder: "台北市"
+        },
+        value: ""
+      },
+      iArea: {
+        elementType: "input",
+        elementConfig: {
+          type: "text",
+          placeholder: "大安區"
+        },
+        value: ""
+      },
+      iStreet: {
+        elementType: "input",
+        elementConfig: {
+          type: "text",
+          placeholder: "幸福路三段59號"
+        },
+        value: ""
+      },
+      iEmail: {
+        elementType: "input",
+        elementConfig: {
+          type: "email",
+          placeholder: "crocodilestear@gmail.com"
+        },
+        value: ""
+      },
+      componyTaxId: {
+        elementType: "input",
+        elementConfig: {
+          type: "text",
+          placeholder: "223100"
+        },
+        value: ""
+      }
     },
     step: 1,
     loading: false,
@@ -113,24 +229,39 @@ class ContactData extends Component {
   };
 
   render() {
+    const formElementsArray = [];
+    for (let key in this.state.orderForm) {
+      formElementsArray.push({
+        id: key,
+        config: this.state.orderForm[key]
+      });
+    }
+    const deliveryForm = formElementsArray.slice(0, 6);
+    const paymentForm = formElementsArray.slice(6, 12);
+    const invoiceForm = [...formElementsArray].splice(0, 12);
     let form = (
       <div className="checkout h-pt-3">
         {/* {console.log(this.props)} */}
-        <CheckoutSummary
-          cart={this.props.cart}
-          totalPrice={this.props.totalPrice}
-          checkoutCancel={this.checkoutCancelledHandler}
-          shippingFee={this.state.shippingFee}
-        />
         {(() => {
           switch (this.state.step) {
             case 1:
-              return <DeliveryForm changeStep={this.stepProgressHandler} />;
+              return (
+                <DeliveryForm
+                  formElementsArray={deliveryForm}
+                  changeStep={this.stepProgressHandler}
+                />
+              );
             case 2:
-              return <PaymentForm changeStep={this.stepProgressHandler} />;
+              return (
+                <PaymentForm
+                  formElementsArray={paymentForm}
+                  changeStep={this.stepProgressHandler}
+                />
+              );
             case 3:
               return (
                 <InvoiceForm
+                  formElementsArray={invoiceForm}
                   changeStep={this.stepProgressHandler}
                   clicked={this.orderHandler}
                 />
@@ -139,6 +270,12 @@ class ContactData extends Component {
               return <h2>Hmmm...Something went wrong</h2>;
           }
         })()}
+        <CheckoutSummary
+          cart={this.props.cart}
+          totalPrice={this.props.totalPrice}
+          checkoutCancel={this.checkoutCancelledHandler}
+          shippingFee={this.state.shippingFee}
+        />
       </div>
     );
     if (this.state.loading) {
