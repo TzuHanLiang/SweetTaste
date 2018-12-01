@@ -12,7 +12,7 @@ const paymentForm = props => {
             value={formElement.config.value}
             label={formElement.config.elementLabel}
             show
-            // changed={event => this.inputChangedHandler(event, formElement.id)}
+            changed={event => props.inputChanged(event, formElement.id)}
           />
         </div>
       );
@@ -26,10 +26,9 @@ const paymentForm = props => {
                 elementConfig={config.elementConfig}
                 value={config.value}
                 label={config.elementLabel}
-                // changed={event => this.inputChangedHandler(event, formElementid)}
+                changed={event => props.inputChanged(event, formElement.id[i])}
                 show={i === 1 ? false : true}
               />
-              {console.log(config)}
             </div>
           ))}
         </div>
@@ -62,82 +61,6 @@ const paymentForm = props => {
             <i className="far fa-circle" />
           </li>
         </ul>
-        {/* <div className="checkout__input-box">
-          <div className="checkout__input ">
-            <label
-              className="heading-primary--sm--light--lightest"
-              htmlFor="creditCard"
-            >
-              信用卡卡號
-            </label>
-            <input
-              type="text"
-              placeholder="0989151529"
-              id="creditCard"
-              className="e-form__control"
-            />
-          </div>
-        </div>
-        <div className="checkout__input-box">
-          <div className="checkout__input checkout__input-float">
-            <label
-              className="heading-primary--sm--light--lightest"
-              htmlFor="firstName"
-            >
-              持卡人姓名
-            </label>
-            <input
-              type="text"
-              placeholder="梁"
-              id="firstName"
-              className="e-form__control"
-            />
-          </div>
-          <div className="checkout__input checkout__input-float">
-            <label
-              className="heading-primary--sm--light--lightest"
-              htmlFor="firstName"
-              style={{ color: "#3F5D45" }}
-            >
-              姓名
-            </label>
-            <input
-              type="text"
-              placeholder="紫涵"
-              id="firstName"
-              className="e-form__control"
-            />
-          </div>
-        </div>
-        <div className="checkout__input-box">
-          <div className="checkout__input checkout__input-float">
-            <label className="heading-primary--sm--light--lightest">
-              有效期限
-            </label>
-            <input type="text" placeholder="月" className="e-form__control" />
-          </div>
-          <div className="checkout__input checkout__input-float ">
-            <label
-              style={{ color: "#3F5D45" }}
-              className="heading-primary--sm--light--lightest"
-            >
-              年
-            </label>
-            <input type="text" placeholder="年" className="e-form__control" />
-          </div>
-          <div className="checkout__input-box">
-            <div className="checkout__input checkout__input-float">
-              <label className="heading-primary--sm--light--lightest">
-                背面末三碼
-              </label>
-              <input
-                type="text"
-                placeholder="339"
-                className="e-form__control"
-              />
-            </div>
-          </div>
-        </div> */}
         {form}
       </div>
       <button

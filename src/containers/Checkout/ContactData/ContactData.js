@@ -180,7 +180,7 @@ class ContactData extends Component {
   };
   // componentWillMount will be a better option, because shippingFee is initialized in here, not in the state, componentWillMount is called before the render() and render() is called before the componentDidMount
   componentWillMount() {
-    // componentDidMount() {
+    // componentDidMount() { //其實沒必要傳值過來, 應該是由用戶的輸入的地址來計算
     const query = new URLSearchParams(this.props.location.search);
     let shippingFee = 0;
     for (let params of query.entries()) {
@@ -198,43 +198,66 @@ class ContactData extends Component {
     this.props.history.goBack();
   };
 
+  inputChangedHandler = (event, inputIdentifier, i) => {
+    const updatedOrderForm = {
+      ...this.state.orderForm
+    };
+    const updatedFormElement = i
+      ? {
+          ...updatedOrderForm[inputIdentifier][i]
+        }
+      : { ...updatedOrderForm[inputIdentifier] };
+    updatedFormElement.value = event.target.value;
+    updatedOrderForm[inputIdentifier] = updatedFormElement;
+    this.setState({ orderForm: updatedOrderForm });
+  };
+
   orderHandler = () => {
     this.setState({ loading: true });
+    const formData = {};
+    for (let formElementIdentifier in this.state.orderForm) {
+      formData[formElementIdentifier] = this.state.orderForm[
+        formElementIdentifier
+      ].value;
+    }
     const order = {
       products: this.props.cart,
       price: this.props.totalPrice,
-      customer: {
-        name: {
-          firstname: "梁",
-          lastname: "紫涵"
-        },
-        tel: "0989151529",
-        email: "crocodilestear@gmail.com",
-        address: {
-          city: "台北市",
-          area: "大安區",
-          street: "幸福路38號"
-        },
-        creditcard: "4073 0112 4518 1143",
-        cardowner: {
-          firstname: "梁",
-          lastname: "紫涵"
-        },
-        duedate: {
-          year: "2032",
-          month: "03"
-        },
-        securitycode: "220",
-        invioce: {
-          address: {
-            city: null,
-            area: null,
-            street: null
-          },
-          email: "crocodilestear@gmail.com",
-          componytaxid: "223100"
-        }
-      }
+      orderData: formData
+
+      //   products: this.props.cart,
+      //   price: this.props.totalPrice,
+      //   customer: {
+      //     name: {
+      //       firstname: "梁",
+      //       lastname: "紫涵"
+      //     },
+      //     tel: "0989151529",
+      //     email: "crocodilestear@gmail.com",
+      //     address: {
+      //       city: "台北市",
+      //       area: "大安區",
+      //       street: "幸福路38號"
+      //     },
+      //     creditcard: "4073 0112 4518 1143",
+      //     cardowner: {
+      //       firstname: "梁",
+      //       lastname: "紫涵"
+      //     },
+      //     duedate: {
+      //       year: "2032",
+      //       month: "03"
+      //     },
+      //     securitycode: "220",
+      //     invioce: {
+      //       address: {
+      //         city: null,
+      //         area: null,
+      //         street: null
+      //       },
+      //       email: "crocodilestear@gmail.com",
+      //       componytaxid: "223100"
+      //     }
     };
     axios
       .post("/orders.json", order)
@@ -267,6 +290,7 @@ class ContactData extends Component {
               return (
                 <DeliveryForm
                   formElementsArray={deliveryForm}
+                  inputChanged={this.inputChangedHandler}
                   changeStep={this.stepProgressHandler}
                 />
               );
@@ -274,6 +298,7 @@ class ContactData extends Component {
               return (
                 <PaymentForm
                   formElementsArray={paymentForm}
+                  inputChanged={this.inputChangedHandler}
                   changeStep={this.stepProgressHandler}
                 />
               );
@@ -281,6 +306,7 @@ class ContactData extends Component {
               return (
                 <InvoiceForm
                   formElementsArray={invoiceForm}
+                  inputChanged={this.inputChangedHandler}
                   changeStep={this.stepProgressHandler}
                   clicked={this.orderHandler}
                 />

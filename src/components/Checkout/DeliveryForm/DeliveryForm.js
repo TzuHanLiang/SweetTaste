@@ -12,7 +12,7 @@ const deliveryForm = props => {
             value={formElement.config.value}
             label={formElement.config.elementLabel}
             show
-            // changed={event => this.inputChangedHandler(event, formElement.id)}
+            changed={event => props.inputChanged(event, formElement.id)}
           />
         </div>
       );
@@ -27,7 +27,9 @@ const deliveryForm = props => {
                   elementConfig={config.elementConfig}
                   value={config.value}
                   label={config.elementLabel}
-                  // changed={event => this.inputChangedHandler(event, formElementid)}
+                  changed={event =>
+                    props.inputChanged(event, formElement.id, i)
+                  }
                   show={
                     formElement.id === "cityAndArea" && i === 1 ? false : true
                   }
@@ -35,11 +37,12 @@ const deliveryForm = props => {
               </div>
             ) : (
               <Input
+                key={formElement.id + i}
                 elementType={config.elementType}
                 elementConfig={config.elementConfig}
                 value={config.value}
                 label={config.elementLabel}
-                // changed={event => this.inputChangedHandler(event, formElementid)}
+                changed={event => props.inputChanged(event, formElement.id, i)}
                 show={
                   formElement.id === "cityAndArea" && i === 1 ? false : true
                 }
@@ -76,33 +79,6 @@ const deliveryForm = props => {
             <i className="far fa-circle" />
           </li>
         </ul>
-        {/* <div className="checkout__input-box">
-          <div className="checkout__input-float">
-            <Input elementType="input" label="姓氏" show />
-          </div>
-          <div className="checkout__input-float">
-            <Input elementType="input" label="姓名" show />
-          </div>
-        </div>
-        <div className="checkout__input-box">
-          <Input elementType="input" label="電話" show />
-        </div>
-        <div className="checkout__input-box">
-          <div className="checkout__input-float">
-            <Input elementType="input" label="地址" show />
-          </div>
-          <div className="checkout__input-float">
-            <Input elementType="input" label="地址" show={false} />
-          </div>
-          <div className="checkout__input">
-            <input
-              type="text"
-              placeholder="幸福路三段59號"
-              id="road"
-              className="e-form__control"
-            />
-          </div>
-        </div> */}
         {form}
       </div>
       <button

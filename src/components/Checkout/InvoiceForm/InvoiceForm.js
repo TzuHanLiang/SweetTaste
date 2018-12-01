@@ -16,52 +16,17 @@ class invoiceForm extends Component {
     const invoiceInfo = this.state.show ? (
       <div className="checkout__input-box">
         <div className="checkout__input ">
-          {/* <label
-            className="heading-primary--sm--light--lightest"
-            htmlFor="email"
-          >
-            電子郵件信箱
-          </label>
-          <input
-            type="text"
-            placeholder="example@gmail.com"
-            id="email"
-            className="e-form__control"
-          /> */}
           <Input
             elementType={formElement[0].config.elementType}
             elementConfig={formElement[0].config.elementConfig}
             value={formElement[0].config.value}
             label={formElement[0].config.elementLabel}
             show
-            // changed={event => this.inputChangedHandler(event, formElement[0].id)}
+            changed={event => this.props.inputChanged(event, formElement[0].id)}
           />
         </div>
       </div>
     ) : (
-      // <div className="checkout__input-box">
-      //   <div className="checkout__input checkout__input-float">
-      //     <label className="heading-primary--sm--light--lightest">地址</label>
-      //     <input type="text" placeholder="台北市" className="e-form__control" />
-      //   </div>
-      //   <div className="checkout__input checkout__input-float ">
-      //     <label
-      //       style={{ color: "#3f5d45" }}
-      //       className="heading-primary--sm--light--lightest"
-      //     >
-      //       地址
-      //     </label>
-      //     <input type="text" placeholder="大安區" className="e-form__control" />
-      //   </div>
-      //   <div className="checkout__input">
-      //     <input
-      //       type="text"
-      //       placeholder="幸福路三段59號"
-      //       id="road"
-      //       className="e-form__control"
-      //     />
-      //   </div>
-      // </div>
       <div className="checkout__input-box">
         {formElement[1].config.map((config, i) =>
           i !== 2 ? (
@@ -71,7 +36,9 @@ class invoiceForm extends Component {
                 elementConfig={config.elementConfig}
                 value={config.value}
                 label={config.elementLabel}
-                // changed={event => this.inputChangedHandler(event, formElementid)}
+                changed={event =>
+                  this.props.inputChanged(event, formElement[1].id[i])
+                }
                 show={
                   formElement[1].id === "cityAndArea" && i === 1 ? false : true
                 }
@@ -79,11 +46,12 @@ class invoiceForm extends Component {
             </div>
           ) : (
             <Input
+              key={formElement.id + i}
               elementType={config.elementType}
               elementConfig={config.elementConfig}
               value={config.value}
               label={config.elementLabel}
-              // changed={event => this.inputChangedHandler(event, formElementid)}
+              changed={event => this.props.inputChanged(event, formElement.id)}
               show={
                 formElement[1].id === "cityAndArea" && i === 1 ? false : true
               }
@@ -143,25 +111,15 @@ class invoiceForm extends Component {
           {invoiceInfo}
           <div className="checkout__input-box">
             <div className="checkout__input ">
-              {/* <label
-                className="heading-primary--sm--light--lightest"
-                htmlFor="taxID"
-              >
-                統一編號
-              </label>
-              <input
-                type="text"
-                placeholder="34856393"
-                id="taxID"
-                className="e-form__control"
-              /> */}
               <Input
                 elementType={formElement[2].config.elementType}
                 elementConfig={formElement[2].config.elementConfig}
                 value={formElement[2].config.value}
                 label={formElement[2].config.elementLabel}
                 show
-                // changed={event => this.inputChangedHandler(event, formElement[3].id)}
+                changed={event =>
+                  this.props.inputChanged(event, formElement[2].id)
+                }
               />
             </div>
           </div>
