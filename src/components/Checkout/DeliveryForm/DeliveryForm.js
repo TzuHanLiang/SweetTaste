@@ -3,13 +3,15 @@ import Input from "../../UI/Input/Input";
 
 const deliveryForm = props => {
   let form = props.formElementsArray.map(formElement => {
-    if (formElement.id === "tel" || formElement.id === "street") {
+    if (formElement.id === "tel") {
       return (
         <div className="checkout__input-box" key={formElement.id}>
           <Input
             elementType={formElement.config.elementType}
             elementConfig={formElement.config.elementConfig}
             value={formElement.config.value}
+            label={formElement.config.elementLabel}
+            show
             // changed={event => this.inputChangedHandler(event, formElement.id)}
           />
         </div>
@@ -17,19 +19,33 @@ const deliveryForm = props => {
     } else {
       return (
         <div className="checkout__input-box" key={formElement.id}>
-          {formElement.config.map((config, i) => (
-            <div className="checkout__input-float" key={formElement.id + i}>
+          {formElement.config.map((config, i) =>
+            i !== 2 ? (
+              <div className="checkout__input-float" key={formElement.id + i}>
+                <Input
+                  elementType={config.elementType}
+                  elementConfig={config.elementConfig}
+                  value={config.value}
+                  label={config.elementLabel}
+                  // changed={event => this.inputChangedHandler(event, formElementid)}
+                  show={
+                    formElement.id === "cityAndArea" && i === 1 ? false : true
+                  }
+                />
+              </div>
+            ) : (
               <Input
                 elementType={config.elementType}
                 elementConfig={config.elementConfig}
                 value={config.value}
+                label={config.elementLabel}
                 // changed={event => this.inputChangedHandler(event, formElementid)}
                 show={
                   formElement.id === "cityAndArea" && i === 1 ? false : true
                 }
               />
-            </div>
-          ))}
+            )
+          )}
         </div>
       );
     }
@@ -88,7 +104,6 @@ const deliveryForm = props => {
           </div>
         </div> */}
         {form}
-        {console.log(props.formElementsArray)}
       </div>
       <button
         onClick={() => props.changeStep(2)}

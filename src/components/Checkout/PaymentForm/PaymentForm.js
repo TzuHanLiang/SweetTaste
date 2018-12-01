@@ -1,6 +1,41 @@
 import React from "react";
+import Input from "../../UI/Input/Input";
 
 const paymentForm = props => {
+  let form = props.formElementsArray.map(formElement => {
+    if (formElement.id === "creditCard") {
+      return (
+        <div className="checkout__input-box" key={formElement.id}>
+          <Input
+            elementType={formElement.config.elementType}
+            elementConfig={formElement.config.elementConfig}
+            value={formElement.config.value}
+            label={formElement.config.elementLabel}
+            show
+            // changed={event => this.inputChangedHandler(event, formElement.id)}
+          />
+        </div>
+      );
+    } else {
+      return (
+        <div className="checkout__input-box" key={formElement.id}>
+          {formElement.config.map((config, i) => (
+            <div className="checkout__input-float" key={formElement.id + i}>
+              <Input
+                elementType={config.elementType}
+                elementConfig={config.elementConfig}
+                value={config.value}
+                label={config.elementLabel}
+                // changed={event => this.inputChangedHandler(event, formElementid)}
+                show={i === 1 ? false : true}
+              />
+              {console.log(config)}
+            </div>
+          ))}
+        </div>
+      );
+    }
+  });
   return (
     <div className="checkout__form">
       <div className="checkout__form-section">
@@ -27,7 +62,7 @@ const paymentForm = props => {
             <i className="far fa-circle" />
           </li>
         </ul>
-        <div className="checkout__input-box">
+        {/* <div className="checkout__input-box">
           <div className="checkout__input ">
             <label
               className="heading-primary--sm--light--lightest"
@@ -102,7 +137,8 @@ const paymentForm = props => {
               />
             </div>
           </div>
-        </div>
+        </div> */}
+        {form}
       </div>
       <button
         onClick={() => props.changeStep(3)}

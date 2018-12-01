@@ -17,6 +17,7 @@ class ContactData extends Component {
             type: "text",
             placeholder: "梁"
           },
+          elementLabel: "姓氏",
           value: ""
         },
         {
@@ -25,6 +26,7 @@ class ContactData extends Component {
             type: "text",
             placeholder: "紫涵"
           },
+          elementLabel: "姓名",
           value: ""
         }
       ],
@@ -34,15 +36,17 @@ class ContactData extends Component {
           type: "text",
           placeholder: "0989151529"
         },
+        elementLabel: "電話",
         value: ""
       },
-      cityAndArea: [
+      address: [
         {
           elementType: "input",
           elementConfig: {
             type: "text",
             placeholder: "台北市"
           },
+          elementLabel: "地址",
           value: ""
         },
         {
@@ -51,31 +55,26 @@ class ContactData extends Component {
             type: "text",
             placeholder: "大安區"
           },
+          elementLabel: "地址",
+          value: ""
+        },
+        {
+          elementType: "input",
+          elementConfig: {
+            type: "text",
+            placeholder: "幸福路38號"
+          },
           value: ""
         }
       ],
-      street: {
-        elementType: "input",
-        elementConfig: {
-          type: "text",
-          placeholder: "幸福路38號"
-        },
-        value: ""
-      },
-      email: {
-        elementType: "input",
-        elementConfig: {
-          type: "email",
-          placeholder: "crocodilestear@gmail.com"
-        },
-        value: ""
-      },
-      creditcard: {
+
+      creditCard: {
         elementType: "input",
         elementConfig: {
           type: "text",
           placeholder: "4073 0112 4518 1143"
         },
+        elementLabel: "信用卡號",
         value: ""
       },
       cardOwner: [
@@ -85,6 +84,7 @@ class ContactData extends Component {
             type: "text",
             placeholder: "梁"
           },
+          elementLabel: "持卡人姓名",
           value: ""
         },
         {
@@ -93,31 +93,48 @@ class ContactData extends Component {
             type: "text",
             placeholder: "紫涵"
           },
+          elementLabel: "持卡人姓名",
           value: ""
         }
       ],
-      dueDateY: {
+      dueDate: [
+        {
+          elementType: "input",
+          elementConfig: {
+            type: "text",
+            placeholder: "2032"
+          },
+          elementLabel: "年",
+          value: ""
+        },
+        {
+          elementType: "input",
+          elementConfig: {
+            type: "text",
+            placeholder: "03"
+          },
+          elementLabel: "月",
+          value: ""
+        }
+      ],
+      securityCode: [
+        {
+          elementType: "input",
+          elementConfig: {
+            type: "text",
+            placeholder: "220"
+          },
+          elementLabel: "背面後三碼",
+          value: ""
+        }
+      ],
+      email: {
         elementType: "input",
         elementConfig: {
-          type: "text",
-          placeholder: "2032"
+          type: "email",
+          placeholder: "crocodilestear@gmail.com"
         },
-        value: ""
-      },
-      dueDateM: {
-        elementType: "input",
-        elementConfig: {
-          type: "text",
-          placeholder: "03"
-        },
-        value: ""
-      },
-      securityCode: {
-        elementType: "input",
-        elementConfig: {
-          type: "text",
-          placeholder: "220"
-        },
+        elementLabel: "電子郵件信箱",
         value: ""
       },
       iCityAndArea: [
@@ -136,30 +153,24 @@ class ContactData extends Component {
             placeholder: "大安區"
           },
           value: ""
+        },
+        {
+          elementType: "input",
+          elementConfig: {
+            type: "text",
+            placeholder: "幸福路三段59號"
+          },
+          value: ""
         }
       ],
-      iStreet: {
-        elementType: "input",
-        elementConfig: {
-          type: "text",
-          placeholder: "幸福路三段59號"
-        },
-        value: ""
-      },
-      iEmail: {
-        elementType: "input",
-        elementConfig: {
-          type: "email",
-          placeholder: "crocodilestear@gmail.com"
-        },
-        value: ""
-      },
+
       componyTaxId: {
         elementType: "input",
         elementConfig: {
           type: "text",
           placeholder: "223100"
         },
+        elementLabel: "統一編號",
         value: ""
       }
     },
@@ -244,9 +255,9 @@ class ContactData extends Component {
         config: this.state.orderForm[key]
       });
     }
-    const deliveryForm = formElementsArray.slice(0, 4);
-    const paymentForm = formElementsArray.slice(6, 12);
-    const invoiceForm = [...formElementsArray].splice(0, 12);
+    const deliveryForm = formElementsArray.slice(0, 3);
+    const paymentForm = formElementsArray.slice(3, 7);
+    const invoiceForm = [...formElementsArray].splice(7, 4);
     let form = (
       <div className="checkout h-pt-3">
         {/* {console.log(this.props)} */}
