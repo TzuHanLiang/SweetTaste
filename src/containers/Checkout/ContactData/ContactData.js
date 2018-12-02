@@ -21,8 +21,8 @@ class ContactData extends Component {
           elementLabel: "姓氏",
           value: "",
           validation: { required: true },
-          valid: false,
-          touched: false
+          errorMessage: "此欄位不可為空",
+          valid: false
         },
         {
           elementType: "input",
@@ -33,8 +33,8 @@ class ContactData extends Component {
           elementLabel: "姓名",
           value: "",
           validation: { required: true },
-          valid: false,
-          touched: false
+          errorMessage: "此欄位不可為空",
+          valid: false
         }
       ],
       tel: {
@@ -51,8 +51,8 @@ class ContactData extends Component {
           maxLength: 10,
           isNumeric: true
         },
-        valid: false,
-        touched: false
+        errorMessage: "請輸入有效的電話號碼",
+        valid: false
       },
       address: [
         {
@@ -64,8 +64,8 @@ class ContactData extends Component {
           elementLabel: "地址",
           value: "",
           validation: { required: true },
-          valid: false,
-          touched: false
+          errorMessage: "此欄位不可為空",
+          valid: false
         },
         {
           elementType: "input",
@@ -76,8 +76,8 @@ class ContactData extends Component {
           elementLabel: "地址",
           value: "",
           validation: { required: true },
-          valid: false,
-          touched: false
+          errorMessage: "此欄位不可為空",
+          valid: false
         },
         {
           elementType: "input",
@@ -87,8 +87,8 @@ class ContactData extends Component {
           },
           value: "",
           validation: { required: true },
-          valid: false,
-          touched: false
+          errorMessage: "此欄位不可為空",
+          valid: false
         }
       ],
 
@@ -106,8 +106,8 @@ class ContactData extends Component {
           maxLength: 12,
           isNumeric: true
         },
-        valid: false,
-        touched: false
+        errorMessage: "請輸入有效的信用卡號",
+        valid: false
       },
       cardOwner: [
         {
@@ -119,8 +119,8 @@ class ContactData extends Component {
           elementLabel: "持卡人姓名",
           value: "",
           validation: { required: true },
-          valid: false,
-          touched: false
+          errorMessage: "此欄位不可為空",
+          valid: false
         },
         {
           elementType: "input",
@@ -133,8 +133,8 @@ class ContactData extends Component {
           validation: {
             required: true
           },
-          valid: false,
-          touched: false
+          errorMessage: "此欄位不可為空",
+          valid: false
         }
       ],
       dueDate: [
@@ -152,8 +152,8 @@ class ContactData extends Component {
             maxLength: 4,
             isNumeric: true
           },
-          valid: false,
-          touched: false
+          errorMessage: "請輸入有效的西元年份",
+          valid: false
         },
         {
           elementType: "input",
@@ -169,8 +169,8 @@ class ContactData extends Component {
             maxLength: 2,
             isNumeric: true
           },
-          valid: false,
-          touched: false
+          errorMessage: "請輸入有效的月份",
+          valid: false
         }
       ],
       securityCode: [
@@ -188,8 +188,8 @@ class ContactData extends Component {
             maxLength: 3,
             isNumeric: true
           },
-          valid: false,
-          touched: false
+          errorMessage: "請輸入有效的安全碼",
+          valid: false
         }
       ],
       email: {
@@ -203,6 +203,7 @@ class ContactData extends Component {
         validation: {
           isEmail: true
         },
+        errorMessage: "請輸入有效的電子郵箱",
         valid: true
       },
       iCityAndArea: [
@@ -213,6 +214,7 @@ class ContactData extends Component {
             placeholder: "台北市"
           },
           elementLabel: "地址",
+          // 如果沒有定義 validation: {},在checkValidity那裡呼叫 rules.required會出現error, 因為rules is undefined.
           validation: {},
           valid: true
         },
@@ -252,12 +254,14 @@ class ContactData extends Component {
           maxLength: 8,
           isNumeric: true
         },
-        valid: true
+        errorMessage: "請輸入有效的統一編號",
+        valid: false
       }
     },
     step: 1,
     loading: false,
-    shippingFee: null
+    shippingFee: null,
+    formIsValid: false
   };
 
   componentWillMount() {
@@ -283,50 +287,35 @@ class ContactData extends Component {
   };
   //validation
   checkValidity(value, rules) {
-    let validity = {
-      isValid: true,
-      errorMessage: ""
-    };
+    // 如果沒有定義validation就直接turn true,(雙重保險, 因為在orderform裡面已經定義empty validation object了)
+    let isValid = true;
     if (!rules) {
       return true;
     }
 
     if (rules.required) {
-      validity.isValid = value.trim() !== "" && validity.isValid;
-      validity.errorMessage = !validity.isValid ? "此欄位不可為空" : "";
+      isValid = value.trim() !== "" && isValid;
     }
 
     if (rules.minLength) {
-      validity.isValid = value.length >= rules.minLength && validity.isValid;
-      validity.errorMessage = !validity.isValid
-        ? "長度不可少於" + rules.minLength
-        : "";
+      isValid = value.length >= rules.minLength && isValid;
     }
 
     if (rules.maxLength) {
-      validity.isValid = value.length <= rules.maxLength && validity.isValid;
-      validity.errorMessage = !validity.isValid
-        ? "長度不可超過" + rules.maxLength
-        : "";
+      isValid = value.length <= rules.maxLength && isValid;
     }
 
     if (rules.isEmail) {
       const pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
-      validity.isValid = pattern.test(value) && validity.isValid;
-      validity.errorMessage = !validity.isValid
-        ? "請輸入有效的電子郵箱" + rules.maxLength
-        : "";
+      isValid = pattern.test(value) && isValid;
     }
 
     if (rules.isNumeric) {
       const pattern = /^\d+$/;
-      validity.isValid = pattern.test(value) && validity.isValid;
-      validity.errorMessage = !validity.isValid
-        ? "請輸入數字" + rules.maxLength
-        : "";
+      isValid = pattern.test(value) && isValid;
     }
 
-    return validity;
+    return isValid;
   }
 
   inputChangedHandler = (event, inputIdentifier, i) => {
@@ -338,8 +327,6 @@ class ContactData extends Component {
 
     if (i === 0 || i) {
       //　在做這件事 => (!Array.isArray(updatedOrderForm[inputIdentifier])
-
-      console.log([...updatedOrderForm[inputIdentifier]]);
       updatedFormElement = [...updatedOrderForm[inputIdentifier]];
 
       updatedFormElement[i].value = event.target.value;
@@ -377,7 +364,7 @@ class ContactData extends Component {
 
     this.setState({ orderForm: updatedOrderForm, formIsValid: formIsValid });
 
-    console.log(updatedOrderForm);
+    // console.log(formIsValid);
   };
 
   // 把資料push到firebase之前把key 跟 input value取出來, 因為config data不需要傳到資料庫
@@ -452,6 +439,7 @@ class ContactData extends Component {
                   inputChanged={this.inputChangedHandler}
                   changeStep={this.stepProgressHandler}
                   clicked={this.orderHandler}
+                  orderable={this.state.formIsValid}
                 />
               );
             default:

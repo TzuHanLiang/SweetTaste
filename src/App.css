@@ -2184,7 +2184,8 @@ ul {
   color: #3f5d45; }
   .e-form__control--invalid {
     border: 2px solid #ffb949;
-    border-radius: 3px; }
+    border-radius: 3px;
+    padding: 1.8rem; }
   .e-form__control:focus {
     outline: none;
     background-color: #fff; }

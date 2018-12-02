@@ -24,6 +24,7 @@ class invoiceForm extends Component {
             invalid={!formElement[0].config.valid}
             shouldValidate={formElement[0].config.validation}
             touched={formElement[0].config.touched}
+            errorMessage={formElement[0].config.errorMessage}
             show
             changed={event => this.props.inputChanged(event, formElement[0].id)}
           />
@@ -40,6 +41,7 @@ class invoiceForm extends Component {
                 value={config.value}
                 invalid={!config.valid}
                 shouldValidate={config.validation}
+                errorMessage={config.errorMessage}
                 label={config.elementLabel}
                 changed={event =>
                   this.props.inputChanged(event, formElement[1].id, i)
@@ -58,6 +60,7 @@ class invoiceForm extends Component {
               invalid={!config.valid}
               shouldValidate={config.validation}
               touched={config.touched}
+              errorMessage={config.errorMessage}
               changed={event =>
                 this.props.inputChanged(event, formElement[1].id, i)
               }
@@ -124,6 +127,7 @@ class invoiceForm extends Component {
                 invalid={!formElement[2].config.valid}
                 shouldValidate={formElement[2].config.validation}
                 touched={formElement[2].config.touched}
+                errorMessage={formElement[2].config.errorMessage}
                 label={formElement[2].config.elementLabel}
                 show
                 changed={event =>
@@ -136,6 +140,8 @@ class invoiceForm extends Component {
         <button
           onClick={this.props.clicked}
           className="btn btn--yellow heading-primary--medium "
+          disabled={!this.props.orderable}
+          style={!this.props.orderable ? { backgroundColor: "#ffb949" } : {}}
         >
           確認結帳
         </button>

@@ -57,35 +57,7 @@ const input = props => {
   //adding error message
   let validationError = null;
   if (props.invalid && props.touched) {
-    const validations = [];
-    for (let key in props.shouldValidate) {
-      validations.push({
-        validate: key,
-        requirement: props.shouldValidate[key]
-      });
-    }
-    validations.forEach(validation => {
-      switch (validation.validate) {
-        case "require":
-          validationError = (
-            <p className={inputClasses.join(" ")}>此欄位不可為空</p>
-          );
-          break;
-        case "minlength":
-          validationError = (
-            <p className={inputClasses.join(" ")}>
-              長度不可少於{validation.validate["minlength"]}
-            </p>
-          );
-          break;
-        default:
-          validationError = (
-            <p className={inputClasses.join(" ")}>此欄位不可為空</p>
-          );
-      }
-    });
-
-    // validationError = <p>Please enter a valid value!</p>;
+    validationError = <p style={{ color: "#ffb949" }}>{props.errorMessage}</p>;
   }
 
   return (
@@ -97,6 +69,7 @@ const input = props => {
         {props.label}
       </label>
       {inputElement}
+      {validationError}
     </div>
   );
 };

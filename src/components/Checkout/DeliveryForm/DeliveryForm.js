@@ -15,6 +15,7 @@ const deliveryForm = props => {
             shouldValidate={formElement.config.validation}
             touched={formElement.config.touched}
             changed={event => props.inputChanged(event, formElement.id)}
+            errorMessage={formElement.config.errorMessage}
             show
           />
         </div>
@@ -36,6 +37,7 @@ const deliveryForm = props => {
                   changed={event =>
                     props.inputChanged(event, formElement.id, i)
                   }
+                  errorMessage={config.errorMessage}
                   show={formElement.id === "address" && i === 1 ? false : true}
                 />
               </div>
@@ -48,6 +50,7 @@ const deliveryForm = props => {
                 invalid={!config.valid}
                 shouldValidate={config.validation}
                 touched={config.touched}
+                errorMessage={config.errorMessage}
                 changed={event => props.inputChanged(event, formElement.id, i)}
               />
             )
