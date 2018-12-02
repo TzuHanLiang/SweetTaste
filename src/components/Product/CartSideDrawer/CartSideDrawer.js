@@ -3,6 +3,7 @@ import Backdrop from "../../UI/Backdrop/Backdrop";
 // import { Link } from "react-router-dom";
 
 class cartSideDrawer extends Component {
+  //為了提高效能只有在要show cartsidedrawer的時候才re-render
   shouldComponentUpdate = (nextProps, nextState) => {
     return (
       nextProps.show !== this.props.show ||

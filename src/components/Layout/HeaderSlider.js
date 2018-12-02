@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./HeaderSlider.module.css";
 
 const slider = props => (
-  <div className="header-image">
+  <div className="header-image h-hero__bg">
     <ul className={styles.cb_slideshow}>
       <li>
         <img

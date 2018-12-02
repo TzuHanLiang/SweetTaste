@@ -39,7 +39,7 @@ class Products extends Component {
     this.setState(preState => {
       return {
         showOrderSummary: !preState.showOrderSummary,
-        showNavigation: false
+        showNavigation: false //這是之前cartsidedrawer放在layout的那一層寫的,希望cartsidedrawer打開時,navigationbar就會關起來
       };
     });
   };

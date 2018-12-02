@@ -260,8 +260,8 @@ class ContactData extends Component {
     },
     step: 1,
     loading: false,
-    shippingFee: null,
-    formIsValid: false
+    formIsValid: false,
+    shippingFee: null
   };
 
   componentWillMount() {
@@ -281,7 +281,7 @@ class ContactData extends Component {
     this.setState({ step: newStep });
   };
 
-  // 其實只是回上一頁的放大(一個取消訂單的概念)
+  // 其實只是回上一頁(一個取消訂單的概念)
   checkoutCancelledHandler = () => {
     this.props.history.goBack();
   };
@@ -319,17 +319,58 @@ class ContactData extends Component {
   }
 
   inputChangedHandler = (event, inputIdentifier, i) => {
-    const updatedOrderForm = {
+    let updatedOrderForm = {
       ...this.state.orderForm
     };
+
+    // object 裡面的object 或是array也要複製一份新的 (寫法看起來很帥但並不好閱讀且容易出錯, 之後優化時改進)
+    for (let key in updatedOrderForm) {
+      updatedOrderForm = {
+        ...updatedOrderForm,
+        key: Array.isArray(updatedOrderForm[key])
+          ? [...updatedOrderForm[key]].map(element => {
+              return {
+                ...element,
+                elementConfig: { ...element["elementConfig"] },
+                validation: { ...element["validation"] }
+              };
+            })
+          : {
+              ...updatedOrderForm[key],
+              elementConfig: { ...updatedOrderForm[key]["elementConfig"] },
+              validation: { ...updatedOrderForm[key]["validation"] }
+            }
+      };
+    }
+
     let updatedFormElement = null;
     let formIsValid = true;
 
     if (i === 0 || i) {
       //　在做這件事 => (!Array.isArray(updatedOrderForm[inputIdentifier])
-      updatedFormElement = [...updatedOrderForm[inputIdentifier]];
 
-      updatedFormElement[i].value = event.target.value;
+      //(下面是在研究redux時, 發現的錯誤)
+      //-------------------------------------------------------------------------
+      // 因為這裡的updatedFormElement是 list of object, 我原來的寫法是直接利用spread operator複製的array去改裡面的物件的值, 但是裡面的物件還是只向舊的物件, 所以當我這樣改的時候已經mutate到舊的物件了, 所以改成下面新的寫法.
+
+      //new way to update the input value to my formelement in an immutable way
+      updatedFormElement = [...updatedOrderForm[inputIdentifier]].map(
+        (element, index) => {
+          if (index !== i) {
+            // 這個 i 是從被輸入的input回傳回來的, 對應該input在orderform裡面FormElements的index,
+            // 所以 This isn't the item I care about - keep it as-is
+            return element;
+          }
+          // this is the one I want - return an updated value
+          return { ...element, value: event.target.value };
+        }
+      );
+
+      // this is the old way I've done, 裡面的object還是指向舊的object, 所以當我這樣改的時候就已經動到舊的資料了, this is bad.
+      // updatedFormElement = [...updatedOrderForm[inputIdentifier]];
+      // updatedFormElement[i].value = event.target.value;
+      //-------------------------------------------------------------------------
+
       // check validation
       updatedFormElement[i].valid = this.checkValidity(
         updatedFormElement[i].value,
