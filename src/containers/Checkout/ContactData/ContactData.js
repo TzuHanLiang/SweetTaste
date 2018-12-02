@@ -9,6 +9,7 @@ import Spinner from "../../../components/UI/Spinner/Spinner";
 
 class ContactData extends Component {
   state = {
+    // 為了使用客製化input並且使用array.map()的方法製作表單而客製化的資料型態, 利用javascript是dynamic type的優勢, 這個object list 裡面 value 有分object跟array兩種類型, (其實可以全部寫成arry, 之後優化時改)
     orderForm: {
       name: [
         {
@@ -18,7 +19,10 @@ class ContactData extends Component {
             placeholder: "梁"
           },
           elementLabel: "姓氏",
-          value: ""
+          value: "",
+          validation: { required: true },
+          valid: false,
+          touched: false
         },
         {
           elementType: "input",
@@ -27,7 +31,10 @@ class ContactData extends Component {
             placeholder: "紫涵"
           },
           elementLabel: "姓名",
-          value: ""
+          value: "",
+          validation: { required: true },
+          valid: false,
+          touched: false
         }
       ],
       tel: {
@@ -37,7 +44,15 @@ class ContactData extends Component {
           placeholder: "0989151529"
         },
         elementLabel: "電話",
-        value: ""
+        value: "",
+        validation: {
+          required: true,
+          minLength: 10,
+          maxLength: 10,
+          isNumeric: true
+        },
+        valid: false,
+        touched: false
       },
       address: [
         {
@@ -47,7 +62,10 @@ class ContactData extends Component {
             placeholder: "台北市"
           },
           elementLabel: "地址",
-          value: ""
+          value: "",
+          validation: { required: true },
+          valid: false,
+          touched: false
         },
         {
           elementType: "input",
@@ -56,7 +74,10 @@ class ContactData extends Component {
             placeholder: "大安區"
           },
           elementLabel: "地址",
-          value: ""
+          value: "",
+          validation: { required: true },
+          valid: false,
+          touched: false
         },
         {
           elementType: "input",
@@ -64,7 +85,10 @@ class ContactData extends Component {
             type: "text",
             placeholder: "幸福路38號"
           },
-          value: ""
+          value: "",
+          validation: { required: true },
+          valid: false,
+          touched: false
         }
       ],
 
@@ -75,7 +99,15 @@ class ContactData extends Component {
           placeholder: "4073 0112 4518 1143"
         },
         elementLabel: "信用卡號",
-        value: ""
+        value: "",
+        validation: {
+          required: true,
+          minLength: 12,
+          maxLength: 12,
+          isNumeric: true
+        },
+        valid: false,
+        touched: false
       },
       cardOwner: [
         {
@@ -85,7 +117,10 @@ class ContactData extends Component {
             placeholder: "梁"
           },
           elementLabel: "持卡人姓名",
-          value: ""
+          value: "",
+          validation: { required: true },
+          valid: false,
+          touched: false
         },
         {
           elementType: "input",
@@ -94,7 +129,12 @@ class ContactData extends Component {
             placeholder: "紫涵"
           },
           elementLabel: "持卡人姓名",
-          value: ""
+          value: "",
+          validation: {
+            required: true
+          },
+          valid: false,
+          touched: false
         }
       ],
       dueDate: [
@@ -104,8 +144,16 @@ class ContactData extends Component {
             type: "text",
             placeholder: "2032"
           },
-          elementLabel: "年",
-          value: ""
+          elementLabel: "有效期限",
+          value: "",
+          validation: {
+            required: true,
+            minLength: 4,
+            maxLength: 4,
+            isNumeric: true
+          },
+          valid: false,
+          touched: false
         },
         {
           elementType: "input",
@@ -114,7 +162,15 @@ class ContactData extends Component {
             placeholder: "03"
           },
           elementLabel: "月",
-          value: ""
+          value: "",
+          validation: {
+            required: true,
+            minLength: 2,
+            maxLength: 2,
+            isNumeric: true
+          },
+          valid: false,
+          touched: false
         }
       ],
       securityCode: [
@@ -125,7 +181,15 @@ class ContactData extends Component {
             placeholder: "220"
           },
           elementLabel: "背面後三碼",
-          value: ""
+          value: "",
+          validation: {
+            required: true,
+            minLength: 3,
+            maxLength: 3,
+            isNumeric: true
+          },
+          valid: false,
+          touched: false
         }
       ],
       email: {
@@ -135,7 +199,11 @@ class ContactData extends Component {
           placeholder: "crocodilestear@gmail.com"
         },
         elementLabel: "電子郵件信箱",
-        value: ""
+        value: "",
+        validation: {
+          isEmail: true
+        },
+        valid: true
       },
       iCityAndArea: [
         {
@@ -144,7 +212,9 @@ class ContactData extends Component {
             type: "text",
             placeholder: "台北市"
           },
-          value: ""
+          elementLabel: "地址",
+          validation: {},
+          valid: true
         },
         {
           elementType: "input",
@@ -152,7 +222,10 @@ class ContactData extends Component {
             type: "text",
             placeholder: "大安區"
           },
-          value: ""
+          elementLabel: "地址",
+          value: "",
+          validation: {},
+          valid: true
         },
         {
           elementType: "input",
@@ -160,7 +233,9 @@ class ContactData extends Component {
             type: "text",
             placeholder: "幸福路三段59號"
           },
-          value: ""
+          value: "",
+          validation: {},
+          valid: true
         }
       ],
 
@@ -168,17 +243,23 @@ class ContactData extends Component {
         elementType: "input",
         elementConfig: {
           type: "text",
-          placeholder: "223100"
+          placeholder: "22310021"
         },
         elementLabel: "統一編號",
-        value: ""
+        value: "",
+        validation: {
+          minLength: 8,
+          maxLength: 8,
+          isNumeric: true
+        },
+        valid: true
       }
     },
     step: 1,
     loading: false,
     shippingFee: null
   };
-  // componentWillMount will be a better option, because shippingFee is initialized in here, not in the state, componentWillMount is called before the render() and render() is called before the componentDidMount
+
   componentWillMount() {
     // componentDidMount() { //其實沒必要傳值過來, 應該是由用戶的輸入的地址來計算
     const query = new URLSearchParams(this.props.location.search);
@@ -191,39 +272,130 @@ class ContactData extends Component {
     this.setState({ shippingFee });
   }
 
+  // 點按進度條可以改變表單的方法
   stepProgressHandler = newStep => {
     this.setState({ step: newStep });
   };
+
+  // 其實只是回上一頁的放大(一個取消訂單的概念)
   checkoutCancelledHandler = () => {
     this.props.history.goBack();
   };
+  //validation
+  checkValidity(value, rules) {
+    let validity = {
+      isValid: true,
+      errorMessage: ""
+    };
+    if (!rules) {
+      return true;
+    }
+
+    if (rules.required) {
+      validity.isValid = value.trim() !== "" && validity.isValid;
+      validity.errorMessage = !validity.isValid ? "此欄位不可為空" : "";
+    }
+
+    if (rules.minLength) {
+      validity.isValid = value.length >= rules.minLength && validity.isValid;
+      validity.errorMessage = !validity.isValid
+        ? "長度不可少於" + rules.minLength
+        : "";
+    }
+
+    if (rules.maxLength) {
+      validity.isValid = value.length <= rules.maxLength && validity.isValid;
+      validity.errorMessage = !validity.isValid
+        ? "長度不可超過" + rules.maxLength
+        : "";
+    }
+
+    if (rules.isEmail) {
+      const pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
+      validity.isValid = pattern.test(value) && validity.isValid;
+      validity.errorMessage = !validity.isValid
+        ? "請輸入有效的電子郵箱" + rules.maxLength
+        : "";
+    }
+
+    if (rules.isNumeric) {
+      const pattern = /^\d+$/;
+      validity.isValid = pattern.test(value) && validity.isValid;
+      validity.errorMessage = !validity.isValid
+        ? "請輸入數字" + rules.maxLength
+        : "";
+    }
+
+    return validity;
+  }
 
   inputChangedHandler = (event, inputIdentifier, i) => {
     const updatedOrderForm = {
       ...this.state.orderForm
     };
     let updatedFormElement = null;
+    let formIsValid = true;
 
     if (i === 0 || i) {
+      //　在做這件事 => (!Array.isArray(updatedOrderForm[inputIdentifier])
+
+      console.log([...updatedOrderForm[inputIdentifier]]);
       updatedFormElement = [...updatedOrderForm[inputIdentifier]];
+
       updatedFormElement[i].value = event.target.value;
+      // check validation
+      updatedFormElement[i].valid = this.checkValidity(
+        updatedFormElement[i].value,
+        updatedFormElement[i].validation
+      );
+      updatedFormElement[i].touched = true;
     } else {
       updatedFormElement = { ...updatedOrderForm[inputIdentifier] };
       updatedFormElement.value = event.target.value;
+      // check validation
+      updatedFormElement.valid = this.checkValidity(
+        updatedFormElement.value,
+        updatedFormElement.validation
+      );
+      updatedFormElement.touched = true;
     }
 
     updatedOrderForm[inputIdentifier] = updatedFormElement;
-    this.setState({ orderForm: updatedOrderForm });
-    // console.log(updatedOrderForm, { ...this.state.orderForm });
+
+    for (let inputIdentifier in updatedOrderForm) {
+      if (Array.isArray(updatedOrderForm[inputIdentifier])) {
+        // 判斷updatedOrderForm[inputIdentifier]是array的話,裡面每一個object的valid === true, formIsValid才 ===true
+        formIsValid = updatedOrderForm[inputIdentifier].reduce(
+          (accumulator, currentValue) =>
+            (accumulator = accumulator && currentValue),
+          true
+        );
+      } else {
+        formIsValid = updatedOrderForm[inputIdentifier].valid && formIsValid;
+      }
+    }
+
+    this.setState({ orderForm: updatedOrderForm, formIsValid: formIsValid });
+
+    console.log(updatedOrderForm);
   };
 
+  // 把資料push到firebase之前把key 跟 input value取出來, 因為config data不需要傳到資料庫
   orderHandler = () => {
     this.setState({ loading: true });
     const formData = {};
     for (let formElementIdentifier in this.state.orderForm) {
-      formData[formElementIdentifier] = this.state.orderForm[
-        formElementIdentifier
-      ].value;
+      if (Array.isArray(this.state.orderForm[formElementIdentifier])) {
+        formData[formElementIdentifier] = this.state.orderForm[
+          formElementIdentifier
+        ]
+          .map(i => i.value)
+          .join("/");
+      } else {
+        formData[formElementIdentifier] = this.state.orderForm[
+          formElementIdentifier
+        ].value;
+      }
     }
     const order = {
       products: this.props.cart,

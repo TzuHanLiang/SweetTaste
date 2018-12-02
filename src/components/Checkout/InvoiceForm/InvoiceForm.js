@@ -21,6 +21,9 @@ class invoiceForm extends Component {
             elementConfig={formElement[0].config.elementConfig}
             value={formElement[0].config.value}
             label={formElement[0].config.elementLabel}
+            invalid={!formElement[0].config.valid}
+            shouldValidate={formElement[0].config.validation}
+            touched={formElement[0].config.touched}
             show
             changed={event => this.props.inputChanged(event, formElement[0].id)}
           />
@@ -35,12 +38,14 @@ class invoiceForm extends Component {
                 elementType={config.elementType}
                 elementConfig={config.elementConfig}
                 value={config.value}
+                invalid={!config.valid}
+                shouldValidate={config.validation}
                 label={config.elementLabel}
                 changed={event =>
-                  this.props.inputChanged(event, formElement[1], i)
+                  this.props.inputChanged(event, formElement[1].id, i)
                 }
                 show={
-                  formElement[1].id === "cityAndArea" && i === 1 ? false : true
+                  formElement[1].id === "iCityAndArea" && i === 1 ? false : true
                 }
               />
             </div>
@@ -50,10 +55,11 @@ class invoiceForm extends Component {
               elementType={config.elementType}
               elementConfig={config.elementConfig}
               value={config.value}
-              label={config.elementLabel}
-              changed={event => this.props.inputChanged(event, formElement.id)}
-              show={
-                formElement[1].id === "cityAndArea" && i === 1 ? false : true
+              invalid={!config.valid}
+              shouldValidate={config.validation}
+              touched={config.touched}
+              changed={event =>
+                this.props.inputChanged(event, formElement[1].id, i)
               }
             />
           )
@@ -115,6 +121,9 @@ class invoiceForm extends Component {
                 elementType={formElement[2].config.elementType}
                 elementConfig={formElement[2].config.elementConfig}
                 value={formElement[2].config.value}
+                invalid={!formElement[2].config.valid}
+                shouldValidate={formElement[2].config.validation}
+                touched={formElement[2].config.touched}
                 label={formElement[2].config.elementLabel}
                 show
                 changed={event =>

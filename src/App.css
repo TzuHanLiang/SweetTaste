@@ -2166,15 +2166,6 @@ ul {
     margin-bottom: 1.6rem; }
     .checkout__input label {
       display: inline-block; }
-    .checkout__input input {
-      font-weight: 400;
-      font-size: 1.6rem;
-      color: #8da291;
-      padding-top: 2rem;
-      padding-bottom: 2rem; }
-      .checkout__input input:focus {
-        outline: none;
-        background-color: #fff; }
   .checkout__input-float {
     float: left;
     width: 50%; }
@@ -2182,14 +2173,21 @@ ul {
 .e-form__control {
   display: block;
   width: 100%;
-  padding: 1.0625rem;
-  font-size: 1rem;
-  color: #8da291;
+  padding: 2rem;
   background-color: #eaf0ed;
   background-clip: padding-box;
   border: none;
   border-radius: 0;
-  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; }
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  font-weight: 400;
+  font-size: 2rem;
+  color: #3f5d45; }
+  .e-form__control--invalid {
+    border: 2px solid #ffb949;
+    border-radius: 3px; }
+  .e-form__control:focus {
+    outline: none;
+    background-color: #fff; }
 
 .p-checkout__orderDetail__order {
   float: right;

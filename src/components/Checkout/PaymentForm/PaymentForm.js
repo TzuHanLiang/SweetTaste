@@ -10,6 +10,9 @@ const paymentForm = props => {
             elementType={formElement.config.elementType}
             elementConfig={formElement.config.elementConfig}
             value={formElement.config.value}
+            invalid={!formElement.config.valid}
+            shouldValidate={formElement.config.validation}
+            touched={formElement.config.touched}
             label={formElement.config.elementLabel}
             show
             changed={event => props.inputChanged(event, formElement.id)}
@@ -26,6 +29,9 @@ const paymentForm = props => {
                 elementConfig={config.elementConfig}
                 value={config.value}
                 label={config.elementLabel}
+                invalid={!config.valid}
+                shouldValidate={config.validation}
+                touched={config.touched}
                 changed={event => props.inputChanged(event, formElement.id, i)}
                 show={i === 1 ? false : true}
               />

@@ -9,10 +9,13 @@ const deliveryForm = props => {
           <Input
             elementType={formElement.config.elementType}
             elementConfig={formElement.config.elementConfig}
-            value={formElement.config.value}
             label={formElement.config.elementLabel}
-            show
+            value={formElement.config.value}
+            invalid={!formElement.config.valid}
+            shouldValidate={formElement.config.validation}
+            touched={formElement.config.touched}
             changed={event => props.inputChanged(event, formElement.id)}
+            show
           />
         </div>
       );
@@ -26,13 +29,14 @@ const deliveryForm = props => {
                   elementType={config.elementType}
                   elementConfig={config.elementConfig}
                   value={config.value}
+                  invalid={!config.valid}
+                  shouldValidate={config.validation}
+                  touched={config.touched}
                   label={config.elementLabel}
                   changed={event =>
                     props.inputChanged(event, formElement.id, i)
                   }
-                  show={
-                    formElement.id === "cityAndArea" && i === 1 ? false : true
-                  }
+                  show={formElement.id === "address" && i === 1 ? false : true}
                 />
               </div>
             ) : (
@@ -41,11 +45,10 @@ const deliveryForm = props => {
                 elementType={config.elementType}
                 elementConfig={config.elementConfig}
                 value={config.value}
-                label={config.elementLabel}
+                invalid={!config.valid}
+                shouldValidate={config.validation}
+                touched={config.touched}
                 changed={event => props.inputChanged(event, formElement.id, i)}
-                show={
-                  formElement.id === "cityAndArea" && i === 1 ? false : true
-                }
               />
             )
           )}

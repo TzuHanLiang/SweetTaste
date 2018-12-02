@@ -102,17 +102,17 @@
     & label {
       display: inline-block;
     }
-    & input {
-      font-weight: 400;
-      font-size: 1.6rem;
-      color: $color-primary-light;
-      padding-top: 2rem;
-      padding-bottom: 2rem;
-      &:focus {
-        outline: none;
-        background-color: $color-white;
-      }
-    }
+    // & input {
+    //   font-weight: 400;
+    //   font-size: 1.6rem;
+    //   color: $color-primary-light;
+    //   padding-top: 2rem;
+    //   padding-bottom: 2rem;
+    //   &:focus {
+    //     outline: none;
+    //     background-color: $color-white;
+    //   }
+    // }
   }
   &__input-float {
     float: left;
@@ -122,14 +122,25 @@
 .e-form__control {
   display: block;
   width: 100%;
-  padding: 1.0625rem;
-  font-size: 1rem;
-  color: #8da291;
+  padding: 2rem;
   background-color: #eaf0ed;
   background-clip: padding-box;
   border: none;
   border-radius: 0;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  font-weight: 400;
+  font-size: 2rem;
+  color: $color-primary;
+
+  &--invalid {
+    border: 2px solid $color-secondary-dark;
+    border-radius: 3px;
+  }
+
+  &:focus {
+    outline: none;
+    background-color: $color-white;
+  }
 }
 
 .p-checkout__orderDetail {
