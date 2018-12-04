@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import * as actionsType from "../../store/actions";
 import HeaderImage from "../../components/Layout/HeaderImage";
 import ProductCard from "../../components/Product/ProductCard/ProductCard";
 import ProductMenuList from "../../components/Product/ProductMenu/ProductMenusList/ProductMenusList";
@@ -6,33 +8,36 @@ import CartSideDrawer from "../../components/Product/CartSideDrawer/CartSideDraw
 import CartToggle from "../../components/Product/CartToggle/CartToggle";
 import CartItem from "../../components/Product/CartItem/CartItem";
 import Spinner from "../../components/UI/Spinner/Spinner";
+import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
 
 import axios from "../../axios";
 
 class Products extends Component {
   state = {
-    products: null,
-    totalProducts: null,
+    products: null, // this is a ui state, used to store current list of products to present on the screen.
+    // totalProducts: null,
     loading: false,
+    showOrderSummary: false,
     showNavigation: false
   };
-  componentDidMount() {
-    axios
-      .get("/products.json")
-      .then(res => {
-        const fetchedProducts = [];
-        for (let key in res.data) {
-          fetchedProducts.push({
-            ...res.data[key],
-            productNo: key
-          });
-        }
-        this.setState({
-          totalProducts: fetchedProducts,
-          products: fetchedProducts
-        });
-      })
-      .catch(error => this.setState({ error: true }));
+  componentWillMount() {
+    // axios
+    //   .get("/products.json")
+    //   .then(res => {
+    //     const fetchedProducts = [];
+    //     for (let key in res.data) {
+    //       fetchedProducts.push({
+    //         ...res.data[key],
+    //         productNo: key
+    //       });
+    //       // fetchedProducts.map(p => console.log(p));
+    //     }
+    //     this.setState({
+    //       totalProducts: fetchedProducts,
+    //       products: fetchedProducts
+    //     });
+    //   })
+    //   .catch(error => this.setState({ error: true }));
   }
 
   orderSummaryToggledHandler = () => {
@@ -51,7 +56,7 @@ class Products extends Component {
   };
 
   productListHandler = tag => {
-    const totalProducts = [...this.state.totalProducts];
+    const totalProducts = [...this.props.pds];
     if (tag === "所有甜點") {
       this.setState({ products: totalProducts });
     } else {
@@ -83,8 +88,8 @@ class Products extends Component {
     ) : (
       <Spinner />
     );
-    if (this.state.products) {
-      products = this.state.products.map(product => {
+    if (this.props.pds) {
+      products = this.props.pds.map(product => {
         return (
           <ProductCard
             key={product.id}
@@ -127,4 +132,24 @@ class Products extends Component {
   }
 }
 
-export default Products;
+// NOTE: mapStateToProps holds a function which receives the state automatically and which returns a javascript object where we define which property should hold which slice of the state.
+const mapStateToProps = state => {
+  return {
+    pds: state.products,
+    cart: state.cart,
+    count: state.count,
+    totalPrice: state.totalPrice
+  };
+};
+// NOTE: mapDispatchToProps receives a function or holds a function which receives the dispatch function as an argument and then also the returns object with props function mappings
+const mapDispatchToProps = dispatch => {
+  return {
+    addToCart: product =>
+      dispatch({ type: actionsType.ADD_PRODUCT, product: product })
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withErrorHandler(Products, axios));

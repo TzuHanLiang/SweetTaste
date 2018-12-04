@@ -16,7 +16,10 @@ const cartItem = props => {
           <i className="fas fa-plus" />
         </button>
         <span className="heading-primary--xs">{props.item.count}</span>
-        <button onClick={() => props.remove(props.item)}>
+        <button
+          onClick={() => props.remove(props.item)}
+          disabled={props.disabled}
+        >
           <i className="fas fa-minus" />
         </button>
       </div>

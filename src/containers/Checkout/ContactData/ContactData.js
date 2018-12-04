@@ -7,6 +7,8 @@ import InvoiceForm from "../../../components/Checkout/InvoiceForm/InvoiceForm";
 import axios from "../../../axios";
 import Spinner from "../../../components/UI/Spinner/Spinner";
 
+import { connect } from "react-redux";
+
 class ContactData extends Component {
   state = {
     // 為了使用客製化input並且使用array.map()的方法製作表單而客製化的資料型態, 利用javascript是dynamic type的優勢, 這個object list 裡面 value 有分object跟array兩種類型, (其實可以全部寫成arry, 之後優化時改)
@@ -502,4 +504,13 @@ class ContactData extends Component {
     return <>{form}</>;
   }
 }
-export default ContactData;
+
+// NOTE: mapStateToProps holds a function which receives the state automatically and which returns a javascript object where we define which property should hold which slice of the state.
+const mapStateToProps = state => {
+  return {
+    cart: state.cart,
+    totalPrice: state.totalPrice
+  };
+};
+
+export default connect(mapStateToProps)(ContactData);

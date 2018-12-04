@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import * as actionsType from "../../store/actions";
 import CartItem from "../../components/Checkout/Cart/CartItem/CartItem";
 import CartItemsSummary from "../../components/Checkout/Cart/CartItemsSummary/CartItemsSummary";
 
@@ -30,6 +32,7 @@ class Checkout extends Component {
         add={addToCart}
         remove={removeFromCart}
         delete={deleteFromCart}
+        disabled={item.count < 1}
       />
     ));
     return (
@@ -53,5 +56,26 @@ class Checkout extends Component {
     );
   }
 }
+// NOTE: mapStateToProps holds a function which receives the state automatically and which returns a javascript object where we define which property should hold which slice of the state.
+const mapStateToProps = state => {
+  return {
+    cart: state.cart,
+    totalPrice: state.totalPrice
+  };
+};
+// NOTE: mapDispatchToProps receives a function or holds a function which receives the dispatch function as an argument and then also the returns object with props function mappings
+const mapDispatchToProps = dispatch => {
+  return {
+    addToCart: product =>
+      dispatch({ type: actionsType.ADD_PRODUCT, product: product }),
+    removeFromCart: product =>
+      dispatch({ type: actionsType.REMOVE_PRODUCT, product: product }),
+    deleteFromCart: product =>
+      dispatch({ type: actionsType.DELETE_PRODUCT, product: product })
+  };
+};
 
-export default Checkout;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Checkout);

@@ -8,7 +8,7 @@ const withErrorHandle = (WrappedComponent, axios) => {
       error: null
     };
     componentWillMount() {
-      //Now we have to state property already we can simply add new properties. So for that I will simply create a new property on the fly by using this, the this keyword to refer to the class and then any name of your choice.
+      //Now I have to state property already I can simply add new properties. So for that I will simply create a new property on the fly by using this, the this keyword to refer to the class.
       this.reqInterceptor = axios.interceptors.request.use(req => {
         this.setState({ error: null });
         return req;
