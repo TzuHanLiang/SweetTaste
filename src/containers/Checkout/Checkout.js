@@ -5,15 +5,8 @@ import CartItem from "../../components/Checkout/Cart/CartItem/CartItem";
 import CartItemsSummary from "../../components/Checkout/Cart/CartItemsSummary/CartItemsSummary";
 
 class Checkout extends Component {
-  state = {
-    shippingFee: 200
-  };
-
   checkoutContinuedHandler = () => {
-    this.props.history.push({
-      pathname: "/contact-data",
-      search: "?shippingFee=" + this.state.shippingFee
-    });
+    this.props.history.push("/contact-data");
   };
 
   render() {
@@ -22,7 +15,8 @@ class Checkout extends Component {
       addToCart,
       removeFromCart,
       deleteFromCart,
-      totalPrice
+      totalPrice,
+      shippingFee
     } = this.props;
 
     const cartItems = cart.map(item => (
@@ -46,7 +40,7 @@ class Checkout extends Component {
           </div>
           <div className="col-1-of-3">
             <CartItemsSummary
-              shippingFee={this.state.shippingFee}
+              shippingFee={shippingFee}
               totalPrice={totalPrice}
               checkoutContinue={this.checkoutContinuedHandler}
             />
@@ -60,7 +54,8 @@ class Checkout extends Component {
 const mapStateToProps = state => {
   return {
     cart: state.cart,
-    totalPrice: state.totalPrice
+    totalPrice: state.totalPrice,
+    shippingFee: state.shippingFee
   };
 };
 // NOTE: mapDispatchToProps receives a function or holds a function which receives the dispatch function as an argument and then also the returns object with props function mappings

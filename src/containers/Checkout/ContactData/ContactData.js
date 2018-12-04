@@ -257,26 +257,13 @@ class ContactData extends Component {
           isNumeric: true
         },
         errorMessage: "請輸入有效的統一編號",
-        valid: false
+        valid: true
       }
     },
     step: 1,
     loading: false,
-    formIsValid: false,
-    shippingFee: null
+    formIsValid: false
   };
-
-  componentWillMount() {
-    // componentDidMount() { //其實沒必要傳值過來, 應該是由用戶的輸入的地址來計算
-    const query = new URLSearchParams(this.props.location.search);
-    let shippingFee = 0;
-    for (let params of query.entries()) {
-      if (params[0] === "shippingFee") {
-        shippingFee = +params[1];
-      }
-    }
-    this.setState({ shippingFee });
-  }
 
   // 點按進度條可以改變表單的方法
   stepProgressHandler = newStep => {
@@ -325,7 +312,7 @@ class ContactData extends Component {
       ...this.state.orderForm
     };
 
-    // object 裡面的object 或是array也要複製一份新的 (寫法看起來很帥但並不好閱讀且容易出錯, 之後優化時改進)
+    // object 裡面的object 或是array也要複製一份新的 (寫法看起來很帥但並不好閱讀且容易出錯, 之後優化時需要改進的部份)
     for (let key in updatedOrderForm) {
       updatedOrderForm = {
         ...updatedOrderForm,
@@ -493,13 +480,12 @@ class ContactData extends Component {
           cart={this.props.cart}
           totalPrice={this.props.totalPrice}
           checkoutCancel={this.checkoutCancelledHandler}
-          shippingFee={this.state.shippingFee}
+          shippingFee={this.props.shippingFee}
         />
       </div>
     );
     if (this.state.loading) {
       form = <Spinner />;
-      // 可以在這裡做動畫 紙飛機飛出去之類的
     }
     return <>{form}</>;
   }
@@ -509,7 +495,8 @@ class ContactData extends Component {
 const mapStateToProps = state => {
   return {
     cart: state.cart,
-    totalPrice: state.totalPrice
+    totalPrice: state.totalPrice,
+    shippingFee: state.shippingFee
   };
 };
 

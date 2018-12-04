@@ -54,7 +54,8 @@ const initialState = {
   ],
   cart: [],
   count: 0,
-  totalPrice: 0
+  totalPrice: 0,
+  shippingFee: 200
 };
 
 const reducer = (state = initialState, action) => {
