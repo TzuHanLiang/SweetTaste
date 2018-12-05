@@ -18,7 +18,9 @@ class Products extends Component {
     showNavigation: false
   };
   componentDidMount() {
-    this.props.initProducts();
+    if (!this.props.pds) {
+      this.props.initProducts();
+    }
     this.setState({ products: this.props.pds });
     console.log(this.props.pds, this.state.products);
   }

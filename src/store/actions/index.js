@@ -5,4 +5,4 @@ export {
   deleteProduct,
   handleProductsList
 } from "./products";
-export { purchaseProducts, purchaseInit } from "./order";
+export { purchaseProducts, purchaseInit, fetchOrders } from "./order";

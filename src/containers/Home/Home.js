@@ -22,7 +22,10 @@ import { NavLink } from "react-router-dom";
 
 class Home extends Component {
   componentDidMount() {
-    this.props.initProducts();
+    //因為這一頁與products page 都會使用, 只需要initializes 一次就好了
+    if (!this.props.pds) {
+      this.props.initProducts();
+    }
   }
 
   render() {
