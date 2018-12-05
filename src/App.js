@@ -21,42 +21,9 @@ class App extends Component {
       <div className="App">
         <Layout>
           {/* <Switch> */}
-          <Route
-            path="/products"
-            render={props => (
-              <Products
-                {...props}
-                // cart={this.state.cart}
-                // count={this.state.count}
-                // totalPrice={this.state.totalPrice}
-                addToCart={this.addCartItemHandler}
-                addProducts={this.addProductsHandler}
-              />
-            )}
-          />
-          <Route
-            path="/checkout"
-            render={props => (
-              <Checkout
-                {...props}
-                // cart={this.state.cart}
-                // totalPrice={this.state.totalPrice}
-                // addToCart={this.addCartItemHandler}
-                removeFromCart={this.removeCartItemHandler}
-                deleteFromCart={this.deleteCartItemHandler}
-              />
-            )}
-          />
-          <Route
-            path="/contact-data"
-            render={props => (
-              <ContactData
-                {...props}
-                // cart={this.state.cart}
-                // totalPrice={this.state.totalPrice}
-              />
-            )}
-          />
+          <Route path="/products" component={Products} />
+          <Route path="/checkout" component={Checkout} />
+          <Route path="/contact-data" component={ContactData} />
           <Route path="/checkout-success" exact component={CheckoutSuccess} />
           <Route path="/orders" exact component={Orders} />
           <Route path="/" exact component={Home} />

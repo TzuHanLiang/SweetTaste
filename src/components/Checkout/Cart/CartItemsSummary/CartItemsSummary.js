@@ -1,7 +1,7 @@
 import React from "react";
 // import { Link } from "react-router-dom";
 
-const orderSummary = props => {
+const cartItemsSummary = props => {
   return (
     <div className="order__summary">
       <h2 className="heading-primary--medium heading-primary--medium--lightest order__summary-title">
@@ -31,4 +31,4 @@ const orderSummary = props => {
   );
 };
 
-export default orderSummary;
+export default cartItemsSummary;

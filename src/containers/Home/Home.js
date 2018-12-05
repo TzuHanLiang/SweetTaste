@@ -32,8 +32,8 @@ class Home extends Component {
         </div>
         <div className="col-row h-hero__list justify-content-center">
           <ul className="h-flex">
-            {menuList.map(menuItem => (
-              <li className="h-hero__list__block">
+            {menuList.map((menuItem, i) => (
+              <li key={i} className="h-hero__list__block">
                 <a href="#" className={menuItem.a}>
                   <div
                     style={{

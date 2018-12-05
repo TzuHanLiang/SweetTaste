@@ -1,11 +1,13 @@
 import React, { Component } from "react";
+import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
-import * as actionsType from "../../store/actions";
+import * as actionCreator from "../../store/actions/index";
 import CartItem from "../../components/Checkout/Cart/CartItem/CartItem";
 import CartItemsSummary from "../../components/Checkout/Cart/CartItemsSummary/CartItemsSummary";
 
 class Checkout extends Component {
   checkoutContinuedHandler = () => {
+    this.props.onInitPurchase();
     this.props.history.push("/contact-data");
   };
 
@@ -19,16 +21,28 @@ class Checkout extends Component {
       shippingFee
     } = this.props;
 
-    const cartItems = cart.map(item => (
-      <CartItem
-        key={item.id}
-        item={item}
-        add={addToCart}
-        remove={removeFromCart}
-        delete={deleteFromCart}
-        disabled={item.count < 1}
-      />
-    ));
+    const cartItems = cart.length ? (
+      cart.map(item => (
+        <CartItem
+          key={item.id}
+          item={item}
+          add={addToCart}
+          remove={removeFromCart}
+          delete={deleteFromCart}
+          disabled={item.count < 2}
+        />
+      ))
+    ) : (
+      <>
+        <p className="heading-primary--large h-m-4">~ 購物車是空的 ~</p>
+        <NavLink
+          className="btn btn--light heading-primary--medium"
+          to="/products"
+        >
+          去逛逛
+        </NavLink>
+      </>
+    );
     return (
       <div className="order">
         <div className="row">
@@ -53,20 +67,18 @@ class Checkout extends Component {
 // NOTE: mapStateToProps holds a function which receives the state automatically and which returns a javascript object where we define which property should hold which slice of the state.
 const mapStateToProps = state => {
   return {
-    cart: state.cart,
-    totalPrice: state.totalPrice,
-    shippingFee: state.shippingFee
+    cart: state.products.cart,
+    totalPrice: state.products.totalPrice,
+    shippingFee: state.products.shippingFee
   };
 };
 // NOTE: mapDispatchToProps receives a function or holds a function which receives the dispatch function as an argument and then also the returns object with props function mappings
 const mapDispatchToProps = dispatch => {
   return {
-    addToCart: product =>
-      dispatch({ type: actionsType.ADD_PRODUCT, product: product }),
-    removeFromCart: product =>
-      dispatch({ type: actionsType.REMOVE_PRODUCT, product: product }),
-    deleteFromCart: product =>
-      dispatch({ type: actionsType.DELETE_PRODUCT, product: product })
+    addToCart: product => dispatch(actionCreator.addProduct(product)),
+    removeFromCart: product => dispatch(actionCreator.removeProduct(product)),
+    deleteFromCart: product => dispatch(actionCreator.deleteProduct(product)),
+    onInitPurchase: () => dispatch(actionCreator.purchaseInit())
   };
 };
 

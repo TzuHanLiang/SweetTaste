@@ -4,10 +4,12 @@ import CheckoutSummary from "../../../components/Checkout/CheckoutSummary/Checko
 import DeliveryForm from "../../../components/Checkout/DeliveryForm/DeliveryForm";
 import PaymentForm from "../../../components/Checkout/PaymentForm/PaymentForm";
 import InvoiceForm from "../../../components/Checkout/InvoiceForm/InvoiceForm";
-import axios from "../../../axios";
 import Spinner from "../../../components/UI/Spinner/Spinner";
-
+import axios from "../../../axios";
+import withErrorHandler from "../../../hoc/withErrorHandler/withErrorHandler";
 import { connect } from "react-redux";
+import * as actionCreator from "../../../store/actions/index";
+import { Redirect } from "react-router-dom";
 
 class ContactData extends Component {
   state = {
@@ -261,7 +263,6 @@ class ContactData extends Component {
       }
     },
     step: 1,
-    loading: false,
     formIsValid: false
   };
 
@@ -393,8 +394,6 @@ class ContactData extends Component {
     }
 
     this.setState({ orderForm: updatedOrderForm, formIsValid: formIsValid });
-
-    // console.log(formIsValid);
   };
 
   // 把資料push到firebase之前把key 跟 input value取出來, 因為config data不需要傳到資料庫
@@ -416,21 +415,16 @@ class ContactData extends Component {
     }
     const order = {
       products: this.props.cart,
-      price: this.props.totalPrice,
+      price: this.props.totalPrice + this.props.shippingFee,
       orderData: formData
     };
-    axios
-      .post("/orders.json", order)
-      .then(response => {
-        this.setState({ loading: false });
-        this.props.history.push("/checkout-success");
-      })
-      .catch(error => {
-        this.setState({ loading: false });
-      });
+    this.props.onOrderProducts(order);
   };
 
   render() {
+    const purchasedRedirect = this.props.purchased ? (
+      <Redirect to="/checkout-success" />
+    ) : null;
     const formElementsArray = [];
     for (let key in this.state.orderForm) {
       formElementsArray.push({
@@ -443,7 +437,7 @@ class ContactData extends Component {
     const invoiceForm = [...formElementsArray].splice(7, 4);
     let form = (
       <div className="checkout h-pt-3">
-        {/* {console.log(this.props)} */}
+        {purchasedRedirect}
         {(() => {
           switch (this.state.step) {
             case 1:
@@ -469,7 +463,7 @@ class ContactData extends Component {
                   inputChanged={this.inputChangedHandler}
                   changeStep={this.stepProgressHandler}
                   clicked={this.orderHandler}
-                  orderable={this.state.formIsValid}
+                  orderable={this.state.formIsValid && this.props.cart.length}
                 />
               );
             default:
@@ -484,7 +478,7 @@ class ContactData extends Component {
         />
       </div>
     );
-    if (this.state.loading) {
+    if (this.props.loading) {
       form = <Spinner />;
     }
     return <>{form}</>;
@@ -494,10 +488,21 @@ class ContactData extends Component {
 // NOTE: mapStateToProps holds a function which receives the state automatically and which returns a javascript object where we define which property should hold which slice of the state.
 const mapStateToProps = state => {
   return {
-    cart: state.cart,
-    totalPrice: state.totalPrice,
-    shippingFee: state.shippingFee
+    cart: state.products.cart,
+    totalPrice: state.products.totalPrice,
+    shippingFee: state.products.shippingFee,
+    loading: state.order.loading,
+    purchased: state.order.purchased
   };
 };
 
-export default connect(mapStateToProps)(ContactData);
+const mapDispatchToProps = dispatch => {
+  return {
+    onOrderProducts: order => dispatch(actionCreator.purchaseProducts(order))
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withErrorHandler(ContactData, axios));
