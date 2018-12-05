@@ -47,7 +47,6 @@ class Products extends Component {
         product => product.tag === tag
       );
       this.setState({ products: updateProducts });
-      console.log(this);
     }
   };
 

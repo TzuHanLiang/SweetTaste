@@ -12,14 +12,38 @@ import quote2 from "../../assets/img/lg-為什麼一定要吃甜點.svg";
 import quoteS2 from "../../assets/img/sm-橫式-為什麼一定要吃甜點.svg";
 import quote3 from "../../assets/img/lg-想吃甜點是不需要理由的.svg";
 import quoteS3 from "../../assets/img/sm-橫式-想吃甜點是不需要理由的.svg";
+import ProductCard from "../../components/Product/ProductCard/ProductCard";
+
+import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
+import axios from "../../axios";
+import { connect } from "react-redux";
+import * as actionCreator from "../../store/actions/index";
+import { NavLink } from "react-router-dom";
 
 class Home extends Component {
+  componentDidMount() {
+    this.props.initProducts();
+  }
+
   render() {
     const menuList = [
       { img: pancakePic, title: "本日精選", a: "h-hero__list__block-today" },
       { img: macaron, title: "人氣推薦", a: "h-hero__list__block-popular" },
       { img: popsicle, title: "新品上市", a: "h-hero__list__block-today" }
     ];
+    let products = null;
+
+    if (this.props.pds) {
+      products = this.props.pds
+        .slice(0, 3)
+        .map(product => (
+          <ProductCard
+            key={product.id}
+            product={product}
+            clicked={this.props.addToCart}
+          />
+        ));
+    }
     return (
       <div className="h-hero col-container">
         <div className="col-row">
@@ -34,7 +58,7 @@ class Home extends Component {
           <ul className="h-flex">
             {menuList.map((menuItem, i) => (
               <li key={i} className="h-hero__list__block">
-                <a href="#" className={menuItem.a}>
+                <NavLink to="/products" className={menuItem.a}>
                   <div
                     style={{
                       backgroundImage: `url(${menuItem.img})`
@@ -45,7 +69,7 @@ class Home extends Component {
                   <div className="h-hero__list__block__word">
                     {menuItem.title}
                   </div>
-                </a>
+                </NavLink>
               </li>
             ))}
           </ul>
@@ -129,9 +153,31 @@ class Home extends Component {
           <div className="p-story__section-mobile h-lg-block h-mt-lg-5 h-mb-lg-5">
             <img src={quoteS3} alt="想吃甜點是不需要理由的" />
           </div>
+          <div className="m-card col-container">
+            <ul className="h-flex h-flex-wrap h-justify-content-between h-mb-5 h-flex-md-column">
+              {products}
+            </ul>
+          </div>
         </div>
       </div>
     );
   }
 }
-export default Home;
+
+const mapStateToProps = state => {
+  return {
+    pds: state.products.products
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    initProducts: () => dispatch(actionCreator.initProducts()),
+    addToCart: product => dispatch(actionCreator.addProduct(product))
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withErrorHandler(Home, axios));
