@@ -15,21 +15,23 @@ class Products extends Component {
   state = {
     products: [],
     showOrderSummary: false,
-    showNavigation: false
+    showNavigation: false,
+    tag: null
   };
+
   componentDidMount() {
     if (!this.props.pds) {
       this.props.initProducts();
     }
-    this.setState({ products: this.props.pds });
-    console.log(this.props.pds, this.state.products);
+    const tag = new URLSearchParams(this.props.location.search).get("tag");
+    this.setState({ products: this.props.pds, tag: tag });
   }
 
   orderSummaryToggledHandler = () => {
     this.setState(preState => {
       return {
-        showOrderSummary: !preState.showOrderSummary,
-        showNavigation: false //這是之前cartsidedrawer放在layout的那一層寫的,希望cartsidedrawer打開時,navigationbar就會關起來
+        showOrderSummary: !preState.showOrderSummary
+        // showNavigation: false //這是之前cartsidedrawer放在layout的那一層寫的,希望cartsidedrawer打開時,navigationbar就會關起來
       };
     });
   };

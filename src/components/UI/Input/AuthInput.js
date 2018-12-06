@@ -2,10 +2,10 @@ import React from "react";
 
 const input = props => {
   let inputElement = null;
-  const inputClasses = ["e-form__control"];
+  const inputClasses = ["l-registered__form__text"];
 
   if (props.invalid && props.shouldValidate && props.touched) {
-    inputClasses.push("e-form__control--invalid");
+    inputClasses.push("l-registered__form__text--invalid");
   }
 
   switch (props.elementType) {
@@ -61,14 +61,12 @@ const input = props => {
   }
 
   return (
-    <div className="checkout__input">
-      <label
-        style={props.show ? { color: "#eaf0ed" } : { color: "#3f5d45" }}
-        className="heading-primary--sm--light--lightest"
-      >
-        {props.label}
-      </label>
-
+    <div className="l-registered__form l-registered__form_small h-flex h-align-content-between h-mb-3">
+      <i
+        className={["fas l-registered__form__icon"]
+          .concat(props.icon)
+          .join(" ")}
+      />
       {inputElement}
       {validationError}
     </div>

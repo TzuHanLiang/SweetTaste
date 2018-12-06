@@ -1,7 +1,8 @@
 import * as actionTypes from "../actions/actionTypes";
 
 const initialState = {
-  products: null,
+  products: null, //totalProducts
+  productsList: null, //products show on the page
   error: false,
   cart: [],
   count: 0,
@@ -75,6 +76,7 @@ const setProducts = (state, action) => {
   return {
     ...state,
     products: action.products,
+    productsList: action.products,
     error: false,
     cart: [],
     count: 0,

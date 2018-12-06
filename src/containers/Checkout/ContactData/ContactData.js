@@ -418,7 +418,8 @@ class ContactData extends Component {
       price: this.props.totalPrice + this.props.shippingFee,
       orderData: formData
     };
-    this.props.onOrderProducts(order);
+
+    this.props.onOrderProducts(order, this.props.token);
   };
 
   render() {
@@ -492,13 +493,15 @@ const mapStateToProps = state => {
     totalPrice: state.products.totalPrice,
     shippingFee: state.products.shippingFee,
     loading: state.order.loading,
-    purchased: state.order.purchased
+    purchased: state.order.purchased,
+    token: state.auth.token
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    onOrderProducts: order => dispatch(actionCreator.purchaseProducts(order))
+    onOrderProducts: (order, token) =>
+      dispatch(actionCreator.purchaseProducts(order, token))
   };
 };
 

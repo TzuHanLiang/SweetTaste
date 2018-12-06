@@ -10,6 +10,7 @@ import Checkout from "./containers/Checkout/Checkout";
 import ContactData from "./containers/Checkout/ContactData/ContactData";
 import Orders from "./containers/Orders/Orders";
 import Home from "./containers/Home/Home";
+import Auth from "./containers/Auth/Auth";
 
 import CheckoutSuccess from "./components/Checkout/CheckoutSuccess";
 
@@ -21,6 +22,7 @@ class App extends Component {
       <div className="App">
         <Layout>
           {/* <Switch> */}
+          <Route path="/auth" component={Auth} />
           <Route path="/products" component={Products} />
           <Route path="/checkout" component={Checkout} />
           <Route path="/contact-data" component={ContactData} />

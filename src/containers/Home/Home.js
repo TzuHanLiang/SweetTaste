@@ -26,6 +26,7 @@ class Home extends Component {
     if (!this.props.pds) {
       this.props.initProducts();
     }
+    console.log(this.props);
   }
 
   render() {
@@ -61,7 +62,13 @@ class Home extends Component {
           <ul className="h-flex">
             {menuList.map((menuItem, i) => (
               <li key={i} className="h-hero__list__block">
-                <NavLink to="/products" className={menuItem.a}>
+                <NavLink
+                  to={{
+                    pathname: "/products",
+                    search: `?tag=${menuItem.title}`
+                  }}
+                  className={menuItem.a}
+                >
                   <div
                     style={{
                       backgroundImage: `url(${menuItem.img})`

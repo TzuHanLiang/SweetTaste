@@ -5,4 +5,7 @@ export {
   deleteProduct,
   handleProductsList
 } from "./products";
+
 export { purchaseProducts, purchaseInit, fetchOrders } from "./order";
+
+export { auth } from "./auth";
