@@ -57,6 +57,7 @@ class Checkout extends Component {
               shippingFee={shippingFee}
               totalPrice={totalPrice}
               checkoutContinue={this.checkoutContinuedHandler}
+              isAuth={this.props.isAuthenticated}
             />
           </div>
         </div>
@@ -69,7 +70,8 @@ const mapStateToProps = state => {
   return {
     cart: state.products.cart,
     totalPrice: state.products.totalPrice,
-    shippingFee: state.products.shippingFee
+    shippingFee: state.products.shippingFee,
+    isAuthenticated: state.auth.token !== null
   };
 };
 // NOTE: mapDispatchToProps receives a function or holds a function which receives the dispatch function as an argument and then also the returns object with props function mappings

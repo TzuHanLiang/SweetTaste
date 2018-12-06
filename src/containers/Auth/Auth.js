@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 import facebook from "../../assets/img/ic-facebook-logotype.svg";
 import google from "../../assets/img/ic-google.svg";
 import yahoo from "../../assets/img/ic-yahoo.svg";
@@ -140,12 +141,19 @@ class Auth extends Component {
         </p>
       );
     }
+    let authRedirect = null;
+    if (this.props.isAuthenticate) {
+      this.props.cart.length
+        ? (authRedirect = <Redirect to="/checkout" />)
+        : (authRedirect = <Redirect to="/products" />);
+    }
     return (
       <div>
         {this.props.loading ? (
           <Spinner />
         ) : (
           <div className="col-container">
+            {authRedirect}
             {errorMessage}
             <div className="p-login col-row">
               <form className="p-login__account" onSubmit={this.submitHandler}>
@@ -272,7 +280,9 @@ class Auth extends Component {
 const mapStateToProps = state => {
   return {
     loading: state.auth.loading,
-    error: state.auth.error
+    error: state.auth.error,
+    isAuthenticate: state.auth.token !== null,
+    cart: state.products.cart
   };
 };
 

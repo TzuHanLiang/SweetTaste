@@ -1,5 +1,5 @@
 import React from "react";
-// import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const cartItemsSummary = props => {
   return (
@@ -21,12 +21,18 @@ const cartItemsSummary = props => {
           <span>NT$ {props.totalPrice + props.shippingFee}</span>
         </li>
       </ul>
-      <button
-        onClick={props.checkoutContinue}
-        className="btn heading-primary--medium btn--yellow"
-      >
-        結帳
-      </button>
+      {props.isAuth ? (
+        <button
+          onClick={props.checkoutContinue}
+          className="btn heading-primary--medium btn--yellow"
+        >
+          結帳
+        </button>
+      ) : (
+        <NavLink to="/auth" className="btn btn--yellow heading-primary--medium">
+          請先登入
+        </NavLink>
+      )}
     </div>
   );
 };
