@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
 import Navbar from "../../components/Navigation/Navbar/Navbar";
 import NavDrawer from "../../components/Navigation/NavDrawer/NavDrawer";
@@ -32,8 +33,12 @@ class layout extends Component {
         <NavToggle toggle={this.navigationToggledHandler} />
         {/* logo */}
         <Logo />
-        <Navbar show={this.state.showNavigation} />
+        <Navbar
+          isAuth={this.props.isAuthenticated}
+          show={this.state.showNavigation}
+        />
         <NavDrawer
+          isAuth={this.props.isAuthenticated}
           show={this.state.showNavigation}
           closed={this.navigationClosedHandler}
         />
@@ -45,4 +50,10 @@ class layout extends Component {
   }
 }
 
-export default layout;
+const mapStateToProps = state => {
+  return {
+    isAuthenticated: state.auth.token !== null
+  };
+};
+
+export default connect(mapStateToProps)(layout);

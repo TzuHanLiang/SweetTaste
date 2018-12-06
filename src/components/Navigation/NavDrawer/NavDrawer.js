@@ -14,7 +14,7 @@ const navDrawer = props => {
       <Backdrop show={show} clicked={closed} />
       <div className={attachedClasses.join(" ")}>
         <nav>
-          <NavigationList closed={closed} />
+          <NavigationList closed={closed} isAuth={props.isAuth} />
         </nav>
       </div>
     </>

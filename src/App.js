@@ -5,14 +5,14 @@ import Layout from "./hoc/Layout/Layout";
 import FooterModify from "./components/Layout/FooterModify";
 
 //containers (pages)
-import Products from "./containers/Products/Products";
-import Checkout from "./containers/Checkout/Checkout";
-import ContactData from "./containers/Checkout/ContactData/ContactData";
-import Orders from "./containers/Orders/Orders";
-import Home from "./containers/Home/Home";
+import Logout from "./containers/Auth/Logout/Logout";
 import Auth from "./containers/Auth/Auth";
-
-import CheckoutSuccess from "./components/Checkout/CheckoutSuccess";
+import Orders from "./containers/Orders/Orders";
+import CheckoutSuccess from "./containers/Checkout/CheckoutSuccess";
+import ContactData from "./containers/Checkout/ContactData/ContactData";
+import Checkout from "./containers/Checkout/Checkout";
+import Products from "./containers/Products/Products";
+import Home from "./containers/Home/Home";
 
 import "./App.css";
 
@@ -22,12 +22,13 @@ class App extends Component {
       <div className="App">
         <Layout>
           {/* <Switch> */}
+          <Route path="/logout" component={Logout} />
           <Route path="/auth" component={Auth} />
-          <Route path="/products" component={Products} />
-          <Route path="/checkout" component={Checkout} />
-          <Route path="/contact-data" component={ContactData} />
-          <Route path="/checkout-success" exact component={CheckoutSuccess} />
           <Route path="/orders" exact component={Orders} />
+          <Route path="/checkout-success" exact component={CheckoutSuccess} />
+          <Route path="/contact-data" component={ContactData} />
+          <Route path="/checkout" component={Checkout} />
+          <Route path="/products" component={Products} />
           <Route path="/" exact component={Home} />
           {/* </Switch> */}
           <FooterModify />

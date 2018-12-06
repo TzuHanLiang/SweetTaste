@@ -7,7 +7,7 @@ const NavigationNavbar = props => {
     <header className="Navigation__header">
       <nav className="Navigation__nav">
         {/* navigation list */}
-        <NavigationList />
+        <NavigationList isAuth={props.isAuth} />
       </nav>
     </header>
   );
