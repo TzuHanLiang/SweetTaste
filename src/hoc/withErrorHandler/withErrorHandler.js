@@ -22,7 +22,6 @@ const withErrorHandle = (WrappedComponent, axios) => {
     }
     //Now as the name suggests, this is a lifecycle method which is executed at the point of time a component isn't required anymore.
     componentWillUnmount() {
-      console.log("will unmount", this.reqInterceptor, this.resInterceptor);
       axios.interceptors.request.eject(this.reqInterceptor);
       axios.interceptors.response.eject(this.resInterceptor);
     }

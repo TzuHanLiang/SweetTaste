@@ -26,7 +26,6 @@ class Home extends Component {
     if (!this.props.pds) {
       this.props.initProducts();
     }
-    console.log(this.props);
   }
 
   render() {

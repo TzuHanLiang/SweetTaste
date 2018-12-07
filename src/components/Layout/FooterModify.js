@@ -49,6 +49,7 @@ const footerModify = () => {
                   <a
                     href="https://www.google.com.tw/maps/place/Da%E2%80%99an+District,+Taipei+City/@25.0263064,121.5263363,14z/data=!3m1!4b1!4m5!3m4!1s0x3442aa2c1969f84d:0x6ea0b5cbf2d9955d!8m2!3d25.0261583!4d121.5427093"
                     target="_blank"
+                    rel="noopener noreferrer"
                   >
                     106 台北市大安區幸福路 59 號
                   </a>
@@ -63,13 +64,13 @@ const footerModify = () => {
             <ul className="l-footer__social h-flex h-mb-md-3">
               <li>
                 {" "}
-                <a href="#">
+                <a href="https://www.instagram.com/hazel_1_2/?hl=en">
                   <img src={icLine} width="32" height="32" alt="IG" />
                 </a>
               </li>
               <li>
                 {" "}
-                <a href="#">
+                <a href="https://www.facebook.com/Crocos0102">
                   <img src={icFacebook} width="32" height="32" alt="FB" />
                 </a>
               </li>

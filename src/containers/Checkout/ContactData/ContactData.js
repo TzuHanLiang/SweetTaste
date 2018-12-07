@@ -10,6 +10,7 @@ import withErrorHandler from "../../../hoc/withErrorHandler/withErrorHandler";
 import { connect } from "react-redux";
 import * as actionCreator from "../../../store/actions/index";
 import { Redirect } from "react-router-dom";
+import { checkValidity } from "../../../shared/utility";
 
 class ContactData extends Component {
   state = {
@@ -275,38 +276,6 @@ class ContactData extends Component {
   checkoutCancelledHandler = () => {
     this.props.history.goBack();
   };
-  //validation
-  checkValidity(value, rules) {
-    // 如果沒有定義validation就直接turn true,(雙重保險, 因為在orderform裡面已經定義empty validation object了)
-    let isValid = true;
-    if (!rules) {
-      return true;
-    }
-
-    if (rules.required) {
-      isValid = value.trim() !== "" && isValid;
-    }
-
-    if (rules.minLength) {
-      isValid = value.length >= rules.minLength && isValid;
-    }
-
-    if (rules.maxLength) {
-      isValid = value.length <= rules.maxLength && isValid;
-    }
-
-    if (rules.isEmail) {
-      const pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
-      isValid = pattern.test(value) && isValid;
-    }
-
-    if (rules.isNumeric) {
-      const pattern = /^\d+$/;
-      isValid = pattern.test(value) && isValid;
-    }
-
-    return isValid;
-  }
 
   inputChangedHandler = (event, inputIdentifier, i) => {
     let updatedOrderForm = {
@@ -362,7 +331,7 @@ class ContactData extends Component {
       //-------------------------------------------------------------------------
 
       // check validation
-      updatedFormElement[i].valid = this.checkValidity(
+      updatedFormElement[i].valid = checkValidity(
         updatedFormElement[i].value,
         updatedFormElement[i].validation
       );
@@ -371,7 +340,7 @@ class ContactData extends Component {
       updatedFormElement = { ...updatedOrderForm[inputIdentifier] };
       updatedFormElement.value = event.target.value;
       // check validation
-      updatedFormElement.valid = this.checkValidity(
+      updatedFormElement.valid = checkValidity(
         updatedFormElement.value,
         updatedFormElement.validation
       );
@@ -416,7 +385,8 @@ class ContactData extends Component {
     const order = {
       products: this.props.cart,
       price: this.props.totalPrice + this.props.shippingFee,
-      orderData: formData
+      orderData: formData,
+      userId: this.props.userId
     };
 
     this.props.onOrderProducts(order, this.props.token);
@@ -494,7 +464,8 @@ const mapStateToProps = state => {
     shippingFee: state.products.shippingFee,
     loading: state.order.loading,
     purchased: state.order.purchased,
-    token: state.auth.token
+    token: state.auth.token,
+    userId: state.auth.userId
   };
 };
 
