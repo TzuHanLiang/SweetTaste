@@ -163,7 +163,10 @@ class Home extends Component {
             <img src={quoteS3} alt="想吃甜點是不需要理由的" />
           </div>
           <div className="m-card col-container">
-            <ul className="h-flex h-flex-wrap h-justify-content-between h-mb-5 h-flex-md-column">
+            <ul
+              className="h-flex h-flex-wrap h-justify-content-between h-mb-5 h-flex-md-column"
+              style={{ width: "110%" }}
+            >
               {products}
             </ul>
           </div>

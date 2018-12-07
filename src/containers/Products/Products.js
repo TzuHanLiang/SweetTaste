@@ -114,6 +114,25 @@ class Products extends Component {
             <div className="col-2-of-3">{products}</div>
           </div>
         </div>
+        {/* <div className="p-product">
+          <div className="col-container">
+            <div className="col-row">
+              <div className="p-product__aside">
+                <ul className="p-product__aside__menu">
+                  <ProductMenuList filter={this.productListHandler} />
+                </ul>
+              </div>
+              <div className="p-product__list ">
+                <div
+                  className="h-flex h-flex-wrap h-justify-content-between h-mb-3 h-flex-md-column"
+                  style={{ width: "110%" }}
+                >
+                  {products}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> */}
       </>
     );
   }
