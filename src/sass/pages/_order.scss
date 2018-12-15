@@ -5,7 +5,12 @@
     margin: 8rem 6rem;
   }
   @include respond(tab-port) {
+    margin: 0 3rem;
   }
+  @include respond(phone) {
+    margin: 0 2rem;
+  }
+
   &__productList {
     background-color: $color-primary-lighter;
     text-align: center;
@@ -13,6 +18,7 @@
     margin-bottom: 2rem;
     @include respond(tab-port) {
       margin: 0;
+      width: 100%;
     }
   }
   &__product {
@@ -20,51 +26,95 @@
     height: 19rem;
     padding: 2rem 0;
     border-bottom: 1px solid $color-primary-lighter;
+    position: relative;
   }
   &__product-img {
     float: left;
     & img {
       height: 15rem;
       width: 15rem;
-      background-position: center;
+      // background-position: center;
       background-size: contain;
     }
   }
 
   &__product-info {
-    float: left;
-    margin-left: 4rem;
-    margin-top: 4rem;
+    @include absCenter;
+    position: absolute;
+    top: 50%;
+    left: 37%;
     text-align: left;
+    width: 10rem;
+    @include respond(phone) {
+      left: 22rem;
+    }
+    // float: left;
+    // margin-left: 4rem;
+    // margin-top: 4rem;
   }
   &__product-count {
-    float: left;
-    margin-left: 4rem;
-    margin-top: 4rem;
+    // float: left;
+    // margin-left: 4rem;
+    // margin-top: 4rem;
+    @include absCenter;
+    position: absolute;
+    top: 50%;
+    left: 60%;
     border: 1px solid $color-primary-lighter;
     background-color: transparent;
+    width: 13.5rem;
     & button {
       padding: 1.6rem;
       color: $color-primary;
       font-size: 1.6rem;
+      @include respond(phone) {
+        padding: 1rem;
+      }
       cursor: pointer;
       background-color: transparent;
       border: 1px none;
+      font-size: 1.5rem;
     }
     & span {
       padding: 1.4rem 1.8rem;
+      @include respond(phone) {
+        padding: 1rem 1.4rem;
+      }
       border-right: 1px solid $color-primary-lighter;
       border-left: 1px solid $color-primary-lighter;
     }
+    @include respond(phone) {
+      left: 86%;
+      width: 10.2rem;
+    }
   }
   &__product-price {
-    float: left;
-    margin-left: 6rem;
-    margin-top: 5rem;
+    // float: left;
+    // margin-left: 6rem;
+    // margin-top: 5rem;
+    @include absCenter;
+    position: absolute;
+    top: 50%;
+    left: 84%;
+    width: 10rem;
+    text-align: left;
+    @include respond(phone) {
+      top: 80%;
+      left: 22rem;
+    }
   }
+
   &__product-delete {
-    float: right;
-    margin-top: 3rem;
+    // float: right;
+    // margin-top: 3rem;
+    @include absCenter;
+    position: absolute;
+    top: 50%;
+    left: 98%;
+    @include respond(phone) {
+      top: 80%;
+      left: 86%;
+    }
     & button {
       border: 1px none;
       cursor: pointer;

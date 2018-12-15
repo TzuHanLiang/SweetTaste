@@ -37,15 +37,11 @@ class Home extends Component {
     let products = null;
 
     if (this.props.pds) {
-      products = this.props.pds
-        .slice(0, 3)
-        .map(product => (
-          <ProductCard
-            key={product.id}
-            product={product}
-            clicked={this.props.addToCart}
-          />
-        ));
+      products = this.props.pds.slice(0, 3).map(product => (
+        <div className="col-1-of-3" key={product.id}>
+          <ProductCard product={product} clicked={this.props.addToCart} />
+        </div>
+      ));
     }
     return (
       <div className="h-hero col-container">
@@ -162,14 +158,7 @@ class Home extends Component {
           <div className="p-story__section-mobile h-lg-block h-mt-lg-5 h-mb-lg-5">
             <img src={quoteS3} alt="想吃甜點是不需要理由的" />
           </div>
-          <div className="m-card col-container">
-            <ul
-              className="h-flex h-flex-wrap h-justify-content-between h-mb-5 h-flex-md-column"
-              style={{ width: "110%" }}
-            >
-              {products}
-            </ul>
-          </div>
+          <div className="row">{products}</div>
         </div>
       </div>
     );

@@ -5,13 +5,20 @@
   &__card {
     width: 30rem;
     margin-top: 4rem;
-    margin-left: 4rem;
+    margin-left: 2rem;
     box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
-    // border-radius: 0.5rem;
+
     overflow: hidden;
     float: left;
+
     @include respond(tab-port) {
-      width: 92%;
+      margin-left: 0;
+      width: 100%;
+      box-shadow: none;
+
+      &:nth-child(1) {
+        margin: 0;
+      }
     }
 
     &__img-box {
@@ -19,6 +26,7 @@
       height: 30rem;
       @include respond(tab-port) {
         width: 100%;
+        overflow: hidden;
       }
     }
     &__img {
@@ -29,6 +37,8 @@
       background-position: center;
       @include respond(tab-port) {
         width: 100%;
+        height: auto;
+        transform: translateY(-30%);
       }
     }
 
@@ -110,64 +120,10 @@
       bottom: 1rem;
       right: 1rem;
     }
+    &__description-box {
+      position: absolute;
+      left: 58%;
+      top: 0;
+    }
   }
 }
-
-// .p-product {
-//   margin-top: 60px;
-// }
-// @media (max-width: 1023px) {
-//   .p-product {
-//     margin: 0;
-//   }
-// }
-// .p-product__aside {
-//   font-weight: bold;
-//   max-width: 31.91489%;
-//   flex: 0 0 31.91489%;
-//   font-size: 1.5rem;
-// }
-// @media (max-width: 1023px) {
-//   .p-product__aside {
-//     max-width: 100%;
-//     flex: 0 0 100%;
-//   }
-// }
-// .p-product__aside__title {
-//   background: #3f5d45;
-//   color: #fff;
-//   text-align: center;
-// }
-// .p-product__aside__menu {
-//   text-align: center;
-// }
-// .p-product__aside__menu_link {
-//   border: 0.0625px solid #eaf0ed;
-//   margin-bottom: 0.0625px;
-// }
-// .p-product__aside__menu_link:hover,
-// .p-product__aside__menu_link:active,
-// .p-product__aside__menu_link:focus,
-// .p-product__aside__menu_link_active {
-//   background: #eaf0ed;
-// }
-// .p-product__list {
-//   max-width: 65.95745%;
-//   flex: 0 0 65.95745%;
-// }
-// @media (max-width: 1023px) {
-//   .p-product__list {
-//     max-width: 100%;
-//     flex: 0 0 100%;
-//   }
-// }
-// .p-product__list .m-card {
-//   flex: 0 0 48.3871%;
-//   max-width: 0 0 48.3871%;
-// }
-// @media (max-width: 1023px) {
-//   .p-product__list .m-card {
-//     flex: 0 0 100%;
-//     max-width: 0 0 100%;
-//   }
-// }

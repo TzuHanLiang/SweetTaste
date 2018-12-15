@@ -42,9 +42,7 @@ class layout extends Component {
           show={this.state.showNavigation}
           closed={this.navigationClosedHandler}
         />
-        <main style={{ marginTop: "10rem", width: "100vw" }}>
-          {this.props.children}
-        </main>
+        <main>{this.props.children}</main>
       </>
     );
   }

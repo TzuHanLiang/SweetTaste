@@ -26,7 +26,7 @@
     }
     @include respond(phone) {
       width: auto;
-      min-height: 10rem;
+      overflow: hidden;
     }
   }
 }
